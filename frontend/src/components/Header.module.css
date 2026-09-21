@@ -12,8 +12,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 24px;
-  padding-block: 28px;
+  padding-block: 38px;
+}
+
+/* Groups nav + CTA/burger as one cluster on the right, with the SAME gap
+   used between individual nav items — .bar's space-between then only has
+   two children (logo, this group), so it can't stretch the button away
+   from the nav with a bigger gap than the nav items have between them. */
+.navActions {
+  display: flex;
+  align-items: center;
+  gap: 28px;
 }
 
 .nav ul {
@@ -22,14 +31,16 @@
 }
 
 .nav a {
+  position: relative;
+  display: inline-block;
   text-decoration: none;
-  /* 800 rather than 700 — Montserrat's 700 reads visibly lighter/grayer
-     at this size than the old Nunito did, even at the same navy-900
-     color; the extra weight brings the perceived color back in line. */
-  font-weight: 800;
+  /* Normal weight at rest — only bold while the section is actually in
+     view (scrollspy sets .active). Hover gets color + underline, not
+     weight, per feedback. */
+  font-weight: 400;
   color: var(--navy-900);
-  padding-bottom: 4px;
-  border-bottom: 2px solid transparent;
+  padding-bottom: 8px;
+  transition: color 0.2s ease;
 }
 
 .nav a:hover {
@@ -37,7 +48,32 @@
 }
 
 .nav a.active {
-  border-bottom-color: var(--navy-900);
+  font-weight: 700;
+}
+
+/* Directional wipe underline: grows left-to-right on enter (origin left,
+   scale 0->1) and erases left-to-right on exit (origin right, scale 1->0
+   — the fixed right edge means the visible segment's left edge is what
+   recedes, so the "erase front" travels left-to-right, matching the ask
+   exactly rather than a generic shrink-to-center/left). Shared by hover
+   and the active (in-view) state, per feedback. */
+.underline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--green-600);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+  pointer-events: none;
+}
+
+.nav a:hover .underline,
+.nav a.active .underline {
+  transform: scaleX(1);
+  transform-origin: left;
 }
 
 .actions {
@@ -93,7 +129,7 @@
 
 @media (max-width: 1023px) {
   .bar {
-    padding-block: 18px;
+    padding-block: 24px;
   }
 
   .nav {
