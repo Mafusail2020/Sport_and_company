@@ -1,0 +1,45 @@
+:root {
+  /* Core palette (pixel-verified against reference screenshots — see docs/design-spec.md) */
+  --navy-900: #1a4358;
+  --navy-950: #102e3d;
+  --navy-800: #274e62;
+  --mint-400: #77f9ac;
+  --mint-500: #4fe08c; /* hover state for mint fills — darker, not in the brief, derived for interaction */
+  --green-600: #53b182;
+  --slate-700: #255164;
+  --bg-light: #f3f7f8;
+  --white: #ffffff;
+  --border-light: #dfe4e7;
+
+  /* Brand-mark-only colors, used solely inside the logo icon graphic */
+  --brand-cyan: #00c2ff;
+  --brand-mint: #20fca5;
+  --brand-navy: #01445a;
+
+  /* Type */
+  --font-heading: "Nunito", "Unbounded", sans-serif;
+  --font-body: "Inter", sans-serif;
+
+  /* Layout */
+  --max-width: 1280px;
+  --gutter: 24px;
+  --section-padding-y: 96px;
+  --radius-pill: 999px;
+  --radius-card: 24px;
+
+  /* Shadows: none by design — flat cards throughout the reference */
+}
+
+@media (min-width: 1024px) {
+  :root {
+    --gutter: 80px;
+    --section-padding-y: 120px;
+  }
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  :root {
+    --gutter: 48px;
+    --section-padding-y: 80px;
+  }
+}
