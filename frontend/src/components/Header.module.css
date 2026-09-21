@@ -2,15 +2,10 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  /* Frosted-glass effect: translucent bg-light + blur instead of a flat
-     opaque bar. The rgba below is --bg-light (#F3F7F8) at 72% alpha —
-     backdrop-filter needs an actual alpha color, not the opaque token, so
-     keep this in sync by hand if --bg-light ever changes. */
-  background: rgba(243, 247, 248, 0.72);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  /* Soft depth instead of a hard border — "less defined" edge. */
-  box-shadow: 0 1px 0 rgba(16, 46, 61, 0.05), 0 16px 32px -24px rgba(16, 46, 61, 0.35);
+  /* Flat, exact match to the page bg (--bg-light) — no shadow, no
+     translucency/blur tint. Earlier glass-effect version read as a
+     different color than the hero once scrolled; reverted per feedback. */
+  background: var(--bg-light);
 }
 
 .bar {
@@ -28,7 +23,10 @@
 
 .nav a {
   text-decoration: none;
-  font-weight: 700;
+  /* 800 rather than 700 — Montserrat's 700 reads visibly lighter/grayer
+     at this size than the old Nunito did, even at the same navy-900
+     color; the extra weight brings the perceived color back in line. */
+  font-weight: 800;
   color: var(--navy-900);
   padding-bottom: 4px;
   border-bottom: 2px solid transparent;

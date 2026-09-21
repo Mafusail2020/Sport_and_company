@@ -25,6 +25,7 @@
   --gutter: 24px;
   --section-padding-y: 96px;
   --radius-pill: 999px;
+  --radius-button: 14px; /* buttons: rounded rect, less round than a full pill (tag chips still use --radius-pill) */
   --radius-card: 24px;
 
   /* Shadows: none by design — flat cards throughout the reference */

@@ -107,7 +107,7 @@
   background: var(--navy-900);
   color: var(--white);
   border: none;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-button);
   padding: 18px;
   font-weight: 700;
   font-size: 1rem;

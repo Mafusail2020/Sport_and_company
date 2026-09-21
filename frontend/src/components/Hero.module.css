@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 48px;
-  padding-block: 48px 80px;
+  padding-block: 72px 80px;
   align-items: center;
 }
 
@@ -54,6 +54,6 @@
 @media (min-width: 1024px) {
   .hero {
     grid-template-columns: 1fr 1fr;
-    padding-block: 64px 100px;
+    padding-block: 96px 100px;
   }
 }
