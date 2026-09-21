@@ -4,7 +4,7 @@ import styles from "./About.module.css";
 
 export default function About() {
   return (
-    <section id="about" className="section">
+    <section id="about" className={`section ${styles.section}`}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.photoWrap}>
           <img

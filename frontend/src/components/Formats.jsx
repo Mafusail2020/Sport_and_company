@@ -9,7 +9,7 @@ function photoUrl(name) {
 
 export default function Formats() {
   return (
-    <section id="formats" className="section">
+    <section id="formats" className={`section ${styles.section}`}>
       <div className="container">
         <div className={styles.head}>
           <div>
