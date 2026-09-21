@@ -1,0 +1,68 @@
+.section {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative "?" glyph pattern, low opacity — purely visual, matches the
+   reference screenshot's dark "why us" background texture. */
+.section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.06;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ctext x='10' y='60' font-family='sans-serif' font-size='48' font-weight='900' fill='%23ffffff'%3E%3F%3C/text%3E%3C/svg%3E");
+  background-repeat: repeat;
+}
+
+.inner {
+  position: relative;
+}
+
+.heading {
+  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  margin-block: 16px 20px;
+}
+
+.paragraph {
+  max-width: 60ch;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.05rem;
+  margin-bottom: 48px;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.card {
+  background: var(--navy-800);
+  border-radius: var(--radius-card);
+  padding: 32px 28px;
+}
+
+.cardNumber {
+  display: block;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  color: var(--green-600);
+  margin-bottom: 16px;
+}
+
+.cardTitle {
+  color: var(--white);
+  font-size: 1.1rem;
+  margin-bottom: 12px;
+}
+
+.card p {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+@media (min-width: 768px) {
+  .cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
