@@ -12,7 +12,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-block: 38px;
+  padding-block: 24px;
 }
 
 /* Groups nav + CTA/burger as one cluster on the right, with the SAME gap
