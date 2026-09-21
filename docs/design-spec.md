@@ -28,20 +28,13 @@ tokens): `#00C2FF` cyan, `#20FCA5` mint, `#01445A` dark navy — taken directly
 from `assets/icon_no bg.svg` fills.
 
 ## Typography
-Confirmed against every heading/body sample across the 16 screenshots:
-- Headings: bold, all-caps, rounded/blocky letterforms with distinctly
-  squared counters (visible on У, О, Ф). **Nunito (800/900 weight,
-  uppercase via CSS)** is used as the shipped choice — it has full Cyrillic
-  coverage, is on Google Fonts (no self-hosting/licensing question), and its
-  rounded terminals are the closest freely-available match to the
-  reference. `e-Ukraine` (suggested in the brief) is not reliably available
-  as a web font with a standard CDN/npm distribution; substituting per the
-  brief's own documented fallback rather than vendoring an unverified font
-  file.
-- Body/UI text: plain geometric sans, less rounded than headings. **Inter**,
-  loaded via Google Fonts (variable weight 400–700), full Cyrillic support.
-- Both fonts confirmed to render Cyrillic correctly (Инter and Nunito both
-  ship Cyrillic subsets on Google Fonts).
+**Montserrat**, single family for both headings (800/900, uppercase via CSS)
+and body/UI text (400–700) — explicit user direction, overriding the
+two-family Nunito/Inter pairing this doc originally shipped with. Loaded via
+Google Fonts, full Cyrillic subset support. Headings keep the bold all-caps
+treatment the reference screenshots show; Montserrat's letterforms are
+squarer/less rounded than Nunito's, a visible but accepted trade-off of the
+single-family direction.
 
 ## Layout & spacing — confirmed from screenshots
 - Max content width: ~1280px centered (measured against the 2988px-wide 2x
