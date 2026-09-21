@@ -9,12 +9,21 @@
   gap: 16px;
 }
 
+.largeWrap {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
 .large {
   width: 100%;
   height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
-  border-radius: var(--radius-card);
+  transition: transform 0.35s ease;
+}
+
+.large:hover {
+  transform: scale(1.06);
 }
 
 .smallGrid {
@@ -23,17 +32,30 @@
   gap: 16px;
 }
 
+.smallWrap {
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
 .small {
   width: 100%;
   height: auto;
   aspect-ratio: 1 / 1;
   object-fit: cover;
-  border-radius: var(--radius-card);
+  transition: transform 0.35s ease;
+}
+
+.small:hover {
+  transform: scale(1.06);
 }
 
 @media (min-width: 900px) {
   .grid {
     grid-template-columns: 3fr 2fr;
+  }
+
+  .largeWrap {
+    height: 100%;
   }
 
   .large {

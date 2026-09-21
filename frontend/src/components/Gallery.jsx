@@ -15,21 +15,24 @@ export default function Gallery() {
         <h2 className={styles.heading}>{gallery.heading}</h2>
 
         <div className={styles.grid}>
-          <img
-            src={photoUrl(gallery.large.photo)}
-            alt={gallery.large.alt}
-            className={styles.large}
-            loading="lazy"
-          />
+          <div className={styles.largeWrap}>
+            <img
+              src={photoUrl(gallery.large.photo)}
+              alt={gallery.large.alt}
+              className={styles.large}
+              loading="lazy"
+            />
+          </div>
           <div className={styles.smallGrid}>
             {gallery.small.map((photo, index) => (
-              <img
-                key={`${photo.photo}-${index}`}
-                src={photoUrl(photo.photo)}
-                alt={photo.alt}
-                className={styles.small}
-                loading="lazy"
-              />
+              <div key={`${photo.photo}-${index}`} className={styles.smallWrap}>
+                <img
+                  src={photoUrl(photo.photo)}
+                  alt={photo.alt}
+                  className={styles.small}
+                  loading="lazy"
+                />
+              </div>
             ))}
           </div>
         </div>
