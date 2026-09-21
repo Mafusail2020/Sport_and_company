@@ -6,9 +6,17 @@
   margin-bottom: 40px;
 }
 
+.heading {
+  font-size: clamp(2.6rem, 6vw, 4rem);
+}
+
 .intro {
   max-width: 38ch;
   color: var(--slate-700);
+}
+
+.introBold {
+  font-weight: 600;
 }
 
 .grid {
@@ -29,6 +37,11 @@
   height: auto;
   aspect-ratio: 4 / 3;
   object-fit: cover;
+  transition: transform 0.35s ease;
+}
+
+.card:hover .photo {
+  transform: scale(1.06);
 }
 
 .body {
@@ -36,7 +49,7 @@
 }
 
 .title {
-  font-size: 1.15rem;
+  font-size: 1.35rem;
   margin-bottom: 12px;
 }
 

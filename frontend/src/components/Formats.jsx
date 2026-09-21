@@ -14,9 +14,9 @@ export default function Formats() {
         <div className={styles.head}>
           <div>
             <span className="eyebrow">{formats.eyebrow}</span>
-            <h2>{formats.heading}</h2>
+            <h2 className={styles.heading}>{formats.heading}</h2>
           </div>
-          <p className={styles.intro}>{formats.intro}</p>
+          <p className={`${styles.intro} ${styles.introBold}`}>{formats.intro}</p>
         </div>
 
         <ul className={styles.grid}>
