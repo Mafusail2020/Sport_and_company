@@ -2,7 +2,15 @@
   position: sticky;
   top: 0;
   z-index: 100;
-  background: var(--bg-light);
+  /* Frosted-glass effect: translucent bg-light + blur instead of a flat
+     opaque bar. The rgba below is --bg-light (#F3F7F8) at 72% alpha —
+     backdrop-filter needs an actual alpha color, not the opaque token, so
+     keep this in sync by hand if --bg-light ever changes. */
+  background: rgba(243, 247, 248, 0.72);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  /* Soft depth instead of a hard border — "less defined" edge. */
+  box-shadow: 0 1px 0 rgba(16, 46, 61, 0.05), 0 16px 32px -24px rgba(16, 46, 61, 0.35);
 }
 
 .bar {
@@ -10,7 +18,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 24px;
-  padding-block: 20px;
+  padding-block: 28px;
 }
 
 .nav ul {
@@ -68,15 +76,28 @@
 .progressTrack {
   height: 3px;
   background: var(--border-light);
+  /* Hidden until the user actually scrolls — only the fade itself
+     transitions; the fill's width below never does, so tracking stays
+     real-time with zero lag behind the scroll position. */
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.progressTrack.visible {
+  opacity: 1;
 }
 
 .progressFill {
   height: 100%;
   background: linear-gradient(90deg, var(--mint-400), var(--brand-cyan));
-  transition: width 0.1s linear;
+  transition: none;
 }
 
 @media (max-width: 1023px) {
+  .bar {
+    padding-block: 18px;
+  }
+
   .nav {
     display: none;
   }

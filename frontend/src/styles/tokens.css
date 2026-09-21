@@ -16,9 +16,9 @@
   --brand-mint: #20fca5;
   --brand-navy: #01445a;
 
-  /* Type */
-  --font-heading: "Nunito", "Unbounded", sans-serif;
-  --font-body: "Inter", sans-serif;
+  /* Type — single family, weight does the work (per user direction) */
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Montserrat", sans-serif;
 
   /* Layout */
   --max-width: 1280px;

@@ -66,7 +66,10 @@ export default function Header() {
         </nav>
       )}
 
-      <div className={styles.progressTrack} aria-hidden="true">
+      <div
+        className={`${styles.progressTrack} ${progress > 0 ? styles.visible : ""}`}
+        aria-hidden="true"
+      >
         <div className={styles.progressFill} style={{ width: `${progress}%` }} />
       </div>
     </header>
