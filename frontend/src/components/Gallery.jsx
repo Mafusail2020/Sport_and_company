@@ -1,0 +1,39 @@
+import { gallery } from "../content/content.js";
+import styles from "./Gallery.module.css";
+
+const photoModules = import.meta.glob("../assets/photos/*.jpg", { eager: true, import: "default" });
+
+function photoUrl(name) {
+  return photoModules[`../assets/photos/${name}`];
+}
+
+export default function Gallery() {
+  return (
+    <section id="gallery" className="section">
+      <div className="container">
+        <span className="eyebrow">{gallery.eyebrow}</span>
+        <h2 className={styles.heading}>{gallery.heading}</h2>
+
+        <div className={styles.grid}>
+          <img
+            src={photoUrl(gallery.large.photo)}
+            alt={gallery.large.alt}
+            className={styles.large}
+            loading="lazy"
+          />
+          <div className={styles.smallGrid}>
+            {gallery.small.map((photo, index) => (
+              <img
+                key={`${photo.photo}-${index}`}
+                src={photoUrl(photo.photo)}
+                alt={photo.alt}
+                className={styles.small}
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
