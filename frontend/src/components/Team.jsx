@@ -1,0 +1,43 @@
+import { team } from "../content/content.js";
+import Button from "./Button.jsx";
+import teamPhoto from "../assets/photos/team-group.jpg";
+import styles from "./Team.module.css";
+
+export default function Team() {
+  return (
+    <section id="team" className="section">
+      <div className={`container ${styles.grid}`}>
+        <div>
+          <span className="eyebrow">{team.eyebrow}</span>
+          <h2 className={styles.heading}>
+            {team.heading[0]}
+            <br />
+            {team.heading[1]}
+          </h2>
+          <p className={styles.paragraph}>{team.paragraph}</p>
+
+          <ul className={styles.pills}>
+            {team.pills.map((pill) => (
+              <li key={pill}>{pill}</li>
+            ))}
+          </ul>
+
+          <Button href="#contact" variant="filled">
+            {team.button}
+          </Button>
+        </div>
+
+        <div className={styles.photoWrap}>
+          <img
+            src={teamPhoto}
+            alt={team.alt}
+            width="1400"
+            height="933"
+            loading="lazy"
+            className={styles.photo}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
