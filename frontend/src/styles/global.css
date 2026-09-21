@@ -110,6 +110,16 @@ ul {
   color: var(--green-600);
 }
 
+/* On dark sections, eyebrows/accents switch to the brighter brand mint —
+   --green-600 is calibrated for contrast on light backgrounds and reads
+   noticeably duller than the reference on navy. Pixel-sampled from the
+   reference screenshot: dark-section accent text is #1FFDA5, an exact
+   match for --brand-mint, not --green-600. */
+.section--dark .eyebrow,
+.section--dark .accent {
+  color: var(--brand-mint);
+}
+
 /* Visible on every interactive element per the quality bar — no reference
    screenshot shows focus states, so this is a deliberate, consistent design
    rather than a browser default. */

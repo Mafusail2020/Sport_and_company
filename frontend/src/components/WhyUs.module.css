@@ -4,14 +4,16 @@
 }
 
 /* Decorative "?" glyph pattern, low opacity — purely visual, matches the
-   reference screenshot's dark "why us" background texture. */
+   reference screenshot's dark "why us" background texture. Reference has
+   fewer, larger, more spaced-out marks than this originally shipped with
+   (was a 160px tile / 48px glyph — noticeably denser than the reference). */
 .section::before {
   content: "";
   position: absolute;
   inset: 0;
   opacity: 0.06;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Ctext x='10' y='60' font-family='sans-serif' font-size='48' font-weight='900' fill='%23ffffff'%3E%3F%3C/text%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Ctext x='15' y='110' font-family='sans-serif' font-size='90' font-weight='900' fill='%23ffffff'%3E%3F%3C/text%3E%3C/svg%3E");
   background-repeat: repeat;
 }
 
@@ -39,15 +41,24 @@
 
 .card {
   background: var(--navy-800);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: var(--radius-card);
   padding: 32px 28px;
+  transition: border-color 0.25s ease, background-color 0.25s ease;
+}
+
+.card:hover {
+  border-color: var(--brand-mint);
+  background: color-mix(in srgb, var(--navy-800) 90%, var(--brand-mint));
 }
 
 .cardNumber {
   display: block;
   font-family: var(--font-heading);
   font-weight: 800;
-  color: var(--green-600);
+  /* Brand mint, not --green-600 — see global.css's .section--dark override;
+     set explicitly here too since this isn't the shared .accent class. */
+  color: var(--brand-mint);
   margin-bottom: 16px;
 }
 
