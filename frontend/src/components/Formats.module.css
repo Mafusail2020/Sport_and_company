@@ -34,6 +34,14 @@
   border: 1px solid var(--border-light);
   border-radius: var(--radius-card);
   overflow: hidden;
+  /* Safari fails to clip a transform-scaled child to a rounded,
+     overflow:hidden ancestor once that child is promoted to its own
+     compositing layer (which the hover scale on .photo does) — the
+     zoomed image visibly spills past the card corners. Forcing a mask
+     makes Safari actually respect the clip; no visual effect in
+     Chrome/Firefox, which already clip correctly. */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+  mask-image: radial-gradient(white, black);
 }
 
 .photo {
