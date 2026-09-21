@@ -34,10 +34,10 @@
   position: relative;
   display: inline-block;
   text-decoration: none;
-  /* Normal weight at rest — only bold while the section is actually in
-     view (scrollspy sets .active). Hover gets color + underline, not
-     weight, per feedback. */
-  font-weight: 400;
+  /* Semi-bold at rest — bumps up to bold only while the section is
+     actually in view (scrollspy sets .active). Hover gets color +
+     underline, not weight. */
+  font-weight: 600;
   color: var(--navy-900);
   padding-bottom: 8px;
   transition: color 0.2s ease;
