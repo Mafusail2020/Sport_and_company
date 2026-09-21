@@ -6,7 +6,7 @@
   overflow: hidden;
   /* Extra breathing room above (from the hero buttons) and below (to the
      next section) — the surrounding sections' own padding wasn't enough. */
-  margin-block: 32px 56px;
+  margin-block: 16px 56px;
 }
 
 .item {
