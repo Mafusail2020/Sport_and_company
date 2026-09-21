@@ -1,0 +1,30 @@
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  border-radius: 8px;
+}
+
+.icon {
+  flex-shrink: 0;
+}
+
+.wordmark {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--font-heading);
+  font-weight: 900;
+  font-size: 1rem;
+  line-height: 1.15;
+  letter-spacing: 0.01em;
+  color: var(--navy-900);
+}
+
+.wordmark.light {
+  color: var(--white);
+}
+
+.amp {
+  color: var(--brand-cyan);
+}
