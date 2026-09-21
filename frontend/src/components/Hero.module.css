@@ -11,6 +11,13 @@
   margin-block: 20px 24px;
 }
 
+/* Forces each part onto its own row regardless of viewport width or font
+   metrics (natural wrapping used to put "СТИЛЬ ЖИТТЯ" on the same line as
+   "СПОРТ —" at some widths) — matches the reference's fixed 3-line break. */
+.headingLine {
+  display: block;
+}
+
 .paragraph {
   max-width: 46ch;
   font-size: 1.1rem;

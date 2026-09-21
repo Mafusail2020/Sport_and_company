@@ -9,9 +9,12 @@ export default function Hero() {
       <div className={styles.copy}>
         <span className="eyebrow">{hero.eyebrow}</span>
         <h1 className={styles.heading}>
-          {hero.heading.join("")}
-          <br />
-          <span className="accent">{hero.headingAccent}</span>
+          {hero.heading.map((line) => (
+            <span key={line} className={styles.headingLine}>
+              {line}
+            </span>
+          ))}
+          <span className={`accent ${styles.headingLine}`}>{hero.headingAccent}</span>
         </h1>
         <p className={styles.paragraph}>{hero.paragraph}</p>
 
