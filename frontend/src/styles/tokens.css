@@ -2,7 +2,7 @@
   /* Core palette (pixel-verified against reference screenshots — see docs/design-spec.md) */
   --navy-900: #1a4358;
   --navy-950: #102e3d;
-  --navy-800: #274e62;
+  --navy-800: #154f64; /* was #274e62 — corrected against a clean pixel sample of the why-us card fill, previous value ran too red */
   --mint-400: #77f9ac;
   --mint-500: #4fe08c; /* hover state for mint fills — darker, not in the brief, derived for interaction */
   --green-600: #53b182;

@@ -80,7 +80,9 @@ ul {
 }
 
 .section--dark {
-  background: var(--navy-900);
+  /* --brand-navy, not --navy-900 — pixel-sampled from 5 points across the
+     reference why-us screenshot, all an exact match for #01445A. */
+  background: var(--brand-navy);
   color: var(--white);
 }
 
