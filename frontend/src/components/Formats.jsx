@@ -1,15 +1,17 @@
 import { formats } from "../content/content.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import { usePhotoOverrides } from "../context/PhotoOverridesContext.jsx";
 import styles from "./Formats.module.css";
 
 const photoModules = import.meta.glob("../assets/photos/*.jpg", { eager: true, import: "default" });
 
-function photoUrl(name) {
+function defaultPhotoUrl(name) {
   return photoModules[`../assets/photos/${name}`];
 }
 
 export default function Formats() {
   const reveal = useScrollReveal();
+  const { overrides } = usePhotoOverrides();
 
   return (
     <section id="formats" className={`section ${styles.section}`}>
@@ -27,7 +29,7 @@ export default function Formats() {
             <li key={card.title} className={`${styles.card} reveal`}>
               <div className={styles.photoWrap}>
                 <img
-                  src={photoUrl(card.photo)}
+                  src={overrides[card.slotKey] ?? defaultPhotoUrl(card.photo)}
                   alt={card.alt}
                   width={card.width}
                   height={card.height}

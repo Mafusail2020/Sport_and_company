@@ -1,11 +1,13 @@
 import { team } from "../content/content.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import { usePhotoOverrides } from "../context/PhotoOverridesContext.jsx";
 import Button from "./Button.jsx";
 import teamPhoto from "../assets/photos/team-group.jpg";
 import styles from "./Team.module.css";
 
 export default function Team() {
   const reveal = useScrollReveal();
+  const { overrides } = usePhotoOverrides();
 
   return (
     <section id="team" className="section">
@@ -32,7 +34,7 @@ export default function Team() {
 
         <div className={styles.photoWrap}>
           <img
-            src={teamPhoto}
+            src={overrides["team"] ?? teamPhoto}
             alt={team.alt}
             width="1400"
             height="933"

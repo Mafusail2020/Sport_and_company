@@ -1,12 +1,14 @@
 import Button from "./Button.jsx";
 import { hero } from "../content/content.js";
 import useScrollReveal from "../hooks/useScrollReveal.js";
+import { usePhotoOverrides } from "../context/PhotoOverridesContext.jsx";
 import heroPhoto from "../assets/photos/hero-team-celebration.jpg";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   const revealCopy = useScrollReveal();
   const revealPhoto = useScrollReveal();
+  const { overrides } = usePhotoOverrides();
 
   return (
     <section id="hero" className={`${styles.hero} container`}>
@@ -40,7 +42,7 @@ export default function Hero() {
 
       <div ref={revealPhoto} className={`${styles.photoWrap} reveal`}>
         <img
-          src={heroPhoto}
+          src={overrides["hero"] ?? heroPhoto}
           alt="Команда Sport&Company святкує перемогу з піднятими руками після футзального матчу"
           width="1600"
           height="1067"
