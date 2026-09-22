@@ -4,9 +4,19 @@ import styles from "./Logo.module.css";
 // Rendered as a live text wordmark (not a flattened logo image) so color can
 // switch per-section (navy on light bg, white on dark bg/footer) and the
 // name stays selectable/accessible text. See docs/asset-inventory.md.
+function scrollToTop(event) {
+  event.preventDefault();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
 export default function Logo({ variant = "dark" }) {
   return (
-    <a href="#hero" className={styles.logo} aria-label="Sport&Company — на початок сторінки">
+    <a
+      href="#hero"
+      className={styles.logo}
+      aria-label="Sport&Company — на початок сторінки"
+      onClick={scrollToTop}
+    >
       <img src={iconUrl} alt="" width="40" height="40" className={styles.icon} />
       <span className={`${styles.wordmark} ${variant === "light" ? styles.light : ""}`}>
         <span className={styles.line}>
