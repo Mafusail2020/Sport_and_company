@@ -22,14 +22,16 @@ export default function Formats() {
         <ul className={styles.grid}>
           {formats.cards.map((card) => (
             <li key={card.title} className={styles.card}>
-              <img
-                src={photoUrl(card.photo)}
-                alt={card.alt}
-                width={card.width}
-                height={card.height}
-                loading="lazy"
-                className={styles.photo}
-              />
+              <div className={styles.photoWrap}>
+                <img
+                  src={photoUrl(card.photo)}
+                  alt={card.alt}
+                  width={card.width}
+                  height={card.height}
+                  loading="lazy"
+                  className={styles.photo}
+                />
+              </div>
               <div className={styles.body}>
                 <h3 className={styles.title}>{card.title}</h3>
                 <p>{card.text}</p>

@@ -53,10 +53,6 @@
 .photoWrap {
   border-radius: var(--radius-card);
   overflow: hidden;
-  /* Forces Safari to actually clip the hover-scaled .photo to this
-     rounded box — see Formats.module.css .card for the full note. */
-  -webkit-mask-image: -webkit-radial-gradient(white, black);
-  mask-image: radial-gradient(white, black);
 }
 
 .photo {
