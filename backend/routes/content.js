@@ -1,5 +1,5 @@
 const express = require("express");
-const { readJson, PRICING_PATH, PHOTO_OVERRIDES_PATH } = require("../lib/blobStore");
+const { readJson, PRICING_PATH, PHOTO_OVERRIDES_PATH, CONTACT_INFO_PATH } = require("../lib/blobStore");
 
 const router = express.Router();
 
@@ -24,6 +24,16 @@ router.get("/photos", async (req, res) => {
   } catch (err) {
     console.error("GET /api/photos failed:", err);
     res.json({ overrides: {} });
+  }
+});
+
+router.get("/contact-info", async (req, res) => {
+  try {
+    const contactInfo = await readJson(CONTACT_INFO_PATH);
+    res.json({ contactInfo: contactInfo || null });
+  } catch (err) {
+    console.error("GET /api/contact-info failed:", err);
+    res.json({ contactInfo: null });
   }
 });
 

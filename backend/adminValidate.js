@@ -91,4 +91,51 @@ function validatePhotoSlotKey(key) {
   return typeof key === "string" && PHOTO_SLOT_KEYS.includes(key);
 }
 
-module.exports = { validatePricingPackages, validatePhotoSlotKey };
+const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const MAX_SOCIAL_LINKS = 6;
+const CONTACT_LIMITS = { email: 200, phone: 40, label: 40, href: 300 };
+
+/**
+ * Validates and sanitizes a contact-info payload (email, phone, social links).
+ * Returns { ok: true, data } or { ok: false, errors }.
+ */
+function validateContactInfo(body) {
+  const errors = [];
+
+  const email = sanitizeText(body && body.email);
+  const phone = sanitizeText(body && body.phone);
+  const socialInput = (body && body.social) || [];
+
+  if (!email) errors.push("email is required");
+  else if (!EMAIL_PATTERN.test(email)) errors.push("email is not a valid address");
+  else if (email.length > CONTACT_LIMITS.email) errors.push(`email must be at most ${CONTACT_LIMITS.email} characters`);
+
+  if (!phone) errors.push("phone is required");
+  else if (phone.length > CONTACT_LIMITS.phone) errors.push(`phone must be at most ${CONTACT_LIMITS.phone} characters`);
+
+  if (!Array.isArray(socialInput)) {
+    errors.push("social must be an array");
+  } else if (socialInput.length > MAX_SOCIAL_LINKS) {
+    errors.push(`social must have at most ${MAX_SOCIAL_LINKS} items`);
+  }
+
+  const social = Array.isArray(socialInput)
+    ? socialInput.map((entry, index) => {
+        const label = sanitizeText(entry && entry.label);
+        const href = sanitizeText(entry && entry.href);
+
+        if (!label) errors.push(`social ${index}: label is required`);
+        if (label.length > CONTACT_LIMITS.label) errors.push(`social ${index}: label must be at most ${CONTACT_LIMITS.label} characters`);
+        if (!href) errors.push(`social ${index}: href is required`);
+        else if (!/^https:\/\//.test(href)) errors.push(`social ${index}: href must start with https://`);
+        else if (href.length > CONTACT_LIMITS.href) errors.push(`social ${index}: href must be at most ${CONTACT_LIMITS.href} characters`);
+
+        return { label, href };
+      })
+    : [];
+
+  if (errors.length > 0) return { ok: false, errors };
+  return { ok: true, data: { email, phone, social } };
+}
+
+module.exports = { validatePricingPackages, validatePhotoSlotKey, validateContactInfo };

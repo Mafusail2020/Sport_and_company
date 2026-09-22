@@ -10,6 +10,7 @@ const { put, get, del } = require("@vercel/blob");
 const PRICING_PATH = "data/pricing.json";
 const PHOTO_OVERRIDES_PATH = "data/photo-overrides.json";
 const CONTACT_LOG_PATH = "data/contact-submissions.json";
+const CONTACT_INFO_PATH = "data/contact-info.json";
 
 const READ_CACHE_TTL_MS = 60 * 1000;
 const readCache = new Map(); // pathname -> { data, expiresAt }
@@ -76,6 +77,7 @@ module.exports = {
   PRICING_PATH,
   PHOTO_OVERRIDES_PATH,
   CONTACT_LOG_PATH,
+  CONTACT_INFO_PATH,
   readJson,
   writeJson,
   appendJsonLine,

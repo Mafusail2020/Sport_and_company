@@ -1,8 +1,16 @@
 const express = require("express");
 const multer = require("multer");
 const requireAdmin = require("../middleware/requireAdmin");
-const { validatePricingPackages, validatePhotoSlotKey } = require("../adminValidate");
-const { readJson, writeJson, deleteBlob, putPhoto, PRICING_PATH, PHOTO_OVERRIDES_PATH } = require("../lib/blobStore");
+const { validatePricingPackages, validatePhotoSlotKey, validateContactInfo } = require("../adminValidate");
+const {
+  readJson,
+  writeJson,
+  deleteBlob,
+  putPhoto,
+  PRICING_PATH,
+  PHOTO_OVERRIDES_PATH,
+  CONTACT_INFO_PATH,
+} = require("../lib/blobStore");
 
 const router = express.Router();
 router.use(requireAdmin);
@@ -89,6 +97,31 @@ router.delete("/photos/:slotKey", async (req, res) => {
   } catch (err) {
     console.error(`DELETE /api/admin/photos/${slotKey} failed:`, err);
     return res.status(500).json({ error: "Could not revert photo" });
+  }
+});
+
+router.put("/contact-info", async (req, res) => {
+  const result = validateContactInfo(req.body);
+  if (!result.ok) {
+    return res.status(400).json({ error: "Invalid contact info", details: result.errors });
+  }
+
+  try {
+    await writeJson(CONTACT_INFO_PATH, result.data);
+    return res.json({ ok: true, contactInfo: result.data });
+  } catch (err) {
+    console.error("PUT /api/admin/contact-info failed:", err);
+    return res.status(500).json({ error: "Could not save contact info" });
+  }
+});
+
+router.delete("/contact-info", async (req, res) => {
+  try {
+    await writeJson(CONTACT_INFO_PATH, null);
+    return res.json({ ok: true });
+  } catch (err) {
+    console.error("DELETE /api/admin/contact-info failed:", err);
+    return res.status(500).json({ error: "Could not revert contact info" });
   }
 });
 
