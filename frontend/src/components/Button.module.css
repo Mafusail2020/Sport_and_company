@@ -11,11 +11,12 @@
   border: 2px solid transparent;
   text-decoration: none;
   white-space: nowrap;
-  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+  transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
 }
 
 .button:hover {
   transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(26, 67, 88, 0.18);
 }
 
 .button:active {
