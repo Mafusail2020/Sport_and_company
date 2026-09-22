@@ -10,9 +10,6 @@ export default function Pricing() {
   const { setSelectedPackage } = usePackageSelection();
   const revealPackages = useScrollReveal();
   const revealFaq = useScrollReveal();
-  // null = "haven't heard back yet, or admin never overrode this" -> shipped
-  // default. [] is a deliberate admin choice to remove the section, and is
-  // NOT the same as null — it must render nothing, not fall back.
   const [packagesOverride, setPackagesOverride] = useState(null);
 
   useEffect(() => {
@@ -24,7 +21,8 @@ export default function Pricing() {
         if (!cancelled && data && Array.isArray(data.packages)) setPackagesOverride(data.packages);
       })
       .catch(() => {
-        // Fails open: stays null, the shipped default packages keep showing.
+        // Fails open: stays null, section stays hidden below — same as
+        // "no packages configured yet."
       });
 
     return () => {
@@ -32,7 +30,12 @@ export default function Pricing() {
     };
   }, []);
 
-  const packages = packagesOverride ?? pricing.packages;
+  // No real packages are live yet, so there's nothing to show by default —
+  // the section only appears once an admin actually saves one via /admin
+  // (pricing.packages in content.js still holds the real transcript copy,
+  // used as PricingEditor's starting point so "add one" means publishing
+  // real approved copy, not writing new content from scratch).
+  const packages = packagesOverride ?? [];
 
   function handleChoose(event, pkg) {
     event.preventDefault();
