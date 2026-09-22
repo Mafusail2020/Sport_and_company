@@ -18,6 +18,7 @@ html {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0.01ms !important;
   }
 }
 
@@ -33,17 +34,32 @@ body {
 
 /* Scroll-triggered reveal, applied via the useScrollReveal hook — an
    IntersectionObserver adds .is-visible once, the first time the
-   element scrolls into view. */
+   element scrolls into view. A .reveal element shows itself either by
+   getting .is-visible directly (single-block sections: Hero, Contact,
+   WhyUs's heading block, ...) or by sitting inside an ancestor that gets
+   .is-visible (grid sections: the ref lives on the grid/list, each card
+   carries .reveal so cards fade in as individual siblings, staggered
+   below via :nth-child — that's the "row by row" effect, not one big
+   block popping in at once). */
 .reveal {
   opacity: 0;
   transform: translateY(44px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.reveal.is-visible {
+.reveal.is-visible,
+.is-visible .reveal {
   opacity: 1;
   transform: none;
 }
+
+.reveal:nth-child(2) { transition-delay: 0.08s; }
+.reveal:nth-child(3) { transition-delay: 0.16s; }
+.reveal:nth-child(4) { transition-delay: 0.24s; }
+.reveal:nth-child(5) { transition-delay: 0.32s; }
+.reveal:nth-child(6) { transition-delay: 0.4s; }
+.reveal:nth-child(7) { transition-delay: 0.48s; }
+.reveal:nth-child(8) { transition-delay: 0.56s; }
 
 h1,
 h2,

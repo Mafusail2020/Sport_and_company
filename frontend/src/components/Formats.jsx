@@ -24,7 +24,7 @@ export default function Formats() {
 
         <ul className={styles.grid}>
           {formats.cards.map((card) => (
-            <li key={card.title} className={styles.card}>
+            <li key={card.title} className={`${styles.card} reveal`}>
               <div className={styles.photoWrap}>
                 <img
                   src={photoUrl(card.photo)}

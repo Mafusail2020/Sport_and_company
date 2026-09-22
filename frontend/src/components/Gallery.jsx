@@ -18,7 +18,7 @@ export default function Gallery() {
         <h2 className={styles.heading}>{gallery.heading}</h2>
 
         <div className={styles.grid}>
-          <div className={styles.largeWrap}>
+          <div className={`${styles.largeWrap} reveal`}>
             <img
               src={photoUrl(gallery.large.photo)}
               alt={gallery.large.alt}
@@ -28,7 +28,7 @@ export default function Gallery() {
           </div>
           <div className={styles.smallGrid}>
             {gallery.small.map((photo, index) => (
-              <div key={`${photo.photo}-${index}`} className={styles.smallWrap}>
+              <div key={`${photo.photo}-${index}`} className={`${styles.smallWrap} reveal`}>
                 <img
                   src={photoUrl(photo.photo)}
                   alt={photo.alt}

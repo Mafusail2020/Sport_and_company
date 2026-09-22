@@ -23,7 +23,7 @@ export default function Partners() {
             design, not missing content. Never fill with invented logos. */}
         <ul className={styles.slots} aria-label="Партнери (слоти очікують лого)">
           {Array.from({ length: partners.slotCount }).map((_, index) => (
-            <li key={index} className={styles.slot}>
+            <li key={index} className={`${styles.slot} reveal`}>
               лого
             </li>
           ))}

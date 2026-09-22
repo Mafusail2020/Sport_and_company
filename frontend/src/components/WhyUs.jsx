@@ -18,7 +18,7 @@ export default function WhyUs() {
 
         <ul className={styles.cards}>
           {whyUs.cards.map((card) => (
-            <li key={card.number} className={styles.card}>
+            <li key={card.number} className={`${styles.card} reveal`}>
               <span className={styles.cardNumber}>{card.number}</span>
               <h3 className={styles.cardTitle}>{card.title}</h3>
               <p>{card.text}</p>

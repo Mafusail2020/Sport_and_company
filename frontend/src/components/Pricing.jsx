@@ -26,7 +26,7 @@ export default function Pricing() {
           {pricing.packages.map((pkg) => (
             <li
               key={pkg.id}
-              className={`${styles.card} ${pkg.featured ? styles.featured : ""}`}
+              className={`${styles.card} ${pkg.featured ? styles.featured : ""} reveal`}
             >
               <span className={`${styles.badge} ${pkg.featured ? styles.badgeFeatured : ""}`}>
                 {pkg.badge}
