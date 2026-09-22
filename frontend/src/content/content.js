@@ -32,8 +32,8 @@ export const hero = {
 };
 
 export const stats = [
-  { number: "30+", label: "проведених подій" },
-  { number: "500+", label: "учасників" },
+  { number: "15+", label: "проведених подій" },
+  { number: "300+", label: "учасників" },
   { number: "10", label: "форматів активностей" },
   { number: "1", label: "спільнота" },
 ];
