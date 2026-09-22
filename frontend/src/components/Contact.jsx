@@ -19,6 +19,28 @@ export default function Contact() {
   const reveal = useScrollReveal();
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
+  const [contactInfoOverride, setContactInfoOverride] = useState(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch("/api/contact-info")
+      .then((response) => (response.ok ? response.json() : null))
+      .then((data) => {
+        if (!cancelled && data && data.contactInfo) setContactInfoOverride(data.contactInfo);
+      })
+      .catch(() => {
+        // Fails open: stays null, the shipped default email/phone/social keep showing.
+      });
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  const email = contactInfoOverride?.email ?? contact.email;
+  const phone = contactInfoOverride?.phone ?? contact.phone;
+  const social = contactInfoOverride?.social ?? contact.social;
 
   useEffect(() => {
     // Syncs local form state with an external signal (a pricing-card click
@@ -70,20 +92,17 @@ export default function Contact() {
             <div>
               <dt>EMAIL</dt>
               <dd>
-                <a href={`mailto:${contact.email}`}>{contact.email}</a>
+                <a href={`mailto:${email}`}>{email}</a>
               </dd>
             </div>
             <div>
               <dt>ТЕЛЕФОН</dt>
-              {/* Dummy placeholder number from the source design — kept as
-                  plain text, not a clickable tel: link, until a real number
-                  is provided. See docs/design-spec.md. */}
-              <dd>{contact.phone}</dd>
+              <dd>{phone}</dd>
             </div>
             <div>
               <dt>СОЦМЕРЕЖІ</dt>
               <dd className={styles.social}>
-                {contact.social.map((item) => (
+                {social.map((item) => (
                   <a key={item.label} href={item.href}>
                     {item.label}
                   </a>
@@ -159,7 +178,7 @@ export default function Contact() {
           )}
           {status === "error" && (
             <p className={`${styles.status} ${styles.statusError}`} role="alert">
-              Щось пішло не так. Спробуйте ще раз або напишіть нам на {contact.email}.
+              Щось пішло не так. Спробуйте ще раз або напишіть нам на {email}.
             </p>
           )}
         </form>

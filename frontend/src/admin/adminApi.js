@@ -42,4 +42,9 @@ export const adminApi = {
     return request(`/api/admin/photos/${slotKey}`, { method: "POST", body: formData });
   },
   resetPhoto: (slotKey) => request(`/api/admin/photos/${slotKey}`, { method: "DELETE" }),
+
+  getContactInfo: () => request("/api/contact-info"),
+  saveContactInfo: (contactInfo) =>
+    request("/api/admin/contact-info", { method: "PUT", body: JSON.stringify(contactInfo) }),
+  resetContactInfo: () => request("/api/admin/contact-info", { method: "DELETE" }),
 };

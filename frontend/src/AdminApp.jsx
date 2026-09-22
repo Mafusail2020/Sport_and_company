@@ -3,12 +3,13 @@ import { adminApi } from "./admin/adminApi.js";
 import LoginForm from "./admin/LoginForm.jsx";
 import PricingEditor from "./admin/PricingEditor.jsx";
 import PhotoSlotManager from "./admin/PhotoSlotManager.jsx";
+import ContactInfoEditor from "./admin/ContactInfoEditor.jsx";
 import Button from "./components/Button.jsx";
 import styles from "./AdminApp.module.css";
 
 export default function AdminApp() {
   const [authStatus, setAuthStatus] = useState("checking"); // checking | anonymous | authenticated
-  const [tab, setTab] = useState("pricing"); // pricing | photos
+  const [tab, setTab] = useState("pricing"); // pricing | photos | contact
 
   useEffect(() => {
     adminApi
@@ -58,9 +59,20 @@ export default function AdminApp() {
         >
           Фото
         </button>
+        <button
+          type="button"
+          className={tab === "contact" ? styles.tabActive : styles.tab}
+          onClick={() => setTab("contact")}
+        >
+          Контакти
+        </button>
       </nav>
 
-      <main className={styles.content}>{tab === "pricing" ? <PricingEditor /> : <PhotoSlotManager />}</main>
+      <main className={styles.content}>
+        {tab === "pricing" && <PricingEditor />}
+        {tab === "photos" && <PhotoSlotManager />}
+        {tab === "contact" && <ContactInfoEditor />}
+      </main>
     </div>
   );
 }
