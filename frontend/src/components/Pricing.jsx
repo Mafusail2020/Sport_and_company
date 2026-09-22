@@ -1,11 +1,13 @@
 import { pricing } from "../content/content.js";
 import { usePackageSelection } from "../context/PackageContext.jsx";
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import Button from "./Button.jsx";
 import Faq from "./Faq.jsx";
 import styles from "./Pricing.module.css";
 
 export default function Pricing() {
   const { setSelectedPackage } = usePackageSelection();
+  const reveal = useScrollReveal();
 
   function handleChoose(event, pkg) {
     event.preventDefault();
@@ -14,7 +16,7 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" className={`section ${styles.section}`}>
+    <section id="pricing" ref={reveal} className={`section ${styles.section} reveal`}>
       <div className="container">
         <span className="eyebrow">{pricing.eyebrow}</span>
         <h2 className={styles.heading}>{pricing.heading}</h2>

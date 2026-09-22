@@ -1,11 +1,14 @@
 import { team } from "../content/content.js";
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import Button from "./Button.jsx";
 import teamPhoto from "../assets/photos/team-group.jpg";
 import styles from "./Team.module.css";
 
 export default function Team() {
+  const reveal = useScrollReveal();
+
   return (
-    <section id="team" className="section">
+    <section id="team" ref={reveal} className="section reveal">
       <div className={`container ${styles.grid}`}>
         <div>
           <span className="eyebrow">{team.eyebrow}</span>

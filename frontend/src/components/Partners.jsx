@@ -1,10 +1,13 @@
 import { partners } from "../content/content.js";
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import Button from "./Button.jsx";
 import styles from "./Partners.module.css";
 
 export default function Partners() {
+  const reveal = useScrollReveal();
+
   return (
-    <section id="partners" className={`${styles.section} section section--dark`}>
+    <section id="partners" ref={reveal} className={`${styles.section} section section--dark reveal`}>
       <div className={`container ${styles.inner}`}>
         <span className="eyebrow">{partners.eyebrow}</span>
         <h2 className={styles.heading}>

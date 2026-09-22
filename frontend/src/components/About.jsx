@@ -1,10 +1,13 @@
 import { about } from "../content/content.js";
 import aboutPhoto from "../assets/photos/about-team-table.jpg";
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import styles from "./About.module.css";
 
 export default function About() {
+  const reveal = useScrollReveal();
+
   return (
-    <section id="about" className={`section ${styles.section}`}>
+    <section id="about" ref={reveal} className={`section ${styles.section} reveal`}>
       <div className={`container ${styles.grid}`}>
         <div className={styles.photoWrap}>
           <img

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { contact } from "../content/content.js";
 import { usePackageSelection } from "../context/PackageContext.jsx";
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import styles from "./Contact.module.css";
 
 const initialForm = { name: "", contact: "", subject: contact.form.subjectOptions[0], details: "" };
@@ -15,6 +16,7 @@ function sanitize(value) {
 
 export default function Contact() {
   const { selectedPackage } = usePackageSelection();
+  const reveal = useScrollReveal();
   const [form, setForm] = useState(initialForm);
   const [status, setStatus] = useState("idle"); // idle | submitting | success | error
 
@@ -57,7 +59,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className={`${styles.section} section section--mint`}>
+    <section id="contact" ref={reveal} className={`${styles.section} section section--mint reveal`}>
       <div className={`container ${styles.grid}`}>
         <div>
           <span className="eyebrow">{contact.eyebrow}</span>

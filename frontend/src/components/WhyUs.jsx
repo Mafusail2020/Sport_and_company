@@ -1,9 +1,12 @@
 import { whyUs } from "../content/content.js";
+import useScrollReveal from "../hooks/useScrollReveal.js";
 import styles from "./WhyUs.module.css";
 
 export default function WhyUs() {
+  const reveal = useScrollReveal();
+
   return (
-    <section id="why-us" className={`${styles.section} section section--dark`}>
+    <section id="why-us" ref={reveal} className={`${styles.section} section section--dark reveal`}>
       <div className={`container ${styles.inner}`}>
         <span className="eyebrow">{whyUs.eyebrow}</span>
         <h2 className={styles.heading}>
