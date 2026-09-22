@@ -7,7 +7,13 @@ export default function Partners() {
     <section id="partners" className={`${styles.section} section section--dark`}>
       <div className={`container ${styles.inner}`}>
         <span className="eyebrow">{partners.eyebrow}</span>
-        <h2 className={styles.heading}>{partners.heading}</h2>
+        <h2 className={styles.heading}>
+          {partners.heading.map((line) => (
+            <span key={line} className={styles.headingLine}>
+              {line}
+            </span>
+          ))}
+        </h2>
         <p className={styles.paragraph}>{partners.paragraph}</p>
 
         {/* Literal empty "лого" placeholder slots — this is the shipped
