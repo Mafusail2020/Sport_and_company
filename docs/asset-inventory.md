@@ -57,13 +57,13 @@ placeholder, per the same approval.
 | `IMG_9691.JPEG` (reused) | — | (see above) | Атмосфера gallery small #2 (мафія) | Same card-game photo reused per transcript's own repeated slot (transcript lists "friends playing Mafia" in both Formats and Gallery). |
 | `IMG_6818.JPG` (reused) | — | (see above) | Атмосфера gallery small #4 (volleyball) | Transcript lists "volleyball action" as both a Formats photo and a Gallery photo — reused intentionally, not a mistake. |
 | `IMG_8650.JPG` (reused) | — | (see above) | Атмосфера gallery small #3 ("group talking outdoors") | Closest available "people talking" shot; reused from Формати for the same reason as above. |
-| `IMG_1453.JPG` (reused) | — | (see above) | Атмосфера gallery small #1 ("team hands huddle") — **no real match** | No hands-huddle photo exists in the asset set. Reusing the celebration shot at a tighter crop as the least-bad option; genuinely weak match, worth a real photo later. |
+| ~~`IMG_1453.JPG`~~ (reused) | — | (see above) | ~~Атмосфера gallery small #1~~ superseded | Was reused here as a stopgap (no hands-huddle photo existed in this set) — later replaced with a real user-supplied hands-huddle photo, see "Later photo replacements" below. |
 | `IMG_0195.JPG` | 3936×2624 | Large group photo, SPORT&Company flag, outdoor evening (camping/trip setting) | Команда (Team/Join-us) photo | Best match for "large group of smiling friends, outdoor" — setting is a trip/campsite rather than a court, but it's the strongest real group-photo available. |
 | `IMG_9699.JPEG` | 1365×2048 | SPORT&Company branded flag/banner hanging in front of a bookshelf | Not used | No section calls for a static banner/flag-on-shelf image; doesn't fit hero, formats, gallery, about, or team slots. |
 | `IMG_3496.JPG` | 2156×1502 | Digital illustration/artwork, portrait of a woman — unrelated to sports or youth-community content | Not used | Out of scope for this project; confirmed with user to ignore. Left untouched in `assets/`, not copied to `frontend/src/assets/`. |
 
 ## Later photo replacements (not from `/assets`)
-Two slots were later re-mapped to photos the user supplied directly in
+Three slots were later re-mapped to photos the user supplied directly in
 conversation, not sourced from this read-only folder — noted here since
 this doc is meant to track what's actually behind each slot, not just the
 original brief's asset set.
@@ -72,9 +72,15 @@ original brief's asset set.
 |---|---|---|
 | Формати → Лекції та розмови | Speaker with a mic addressing a seated audience in a bookshop/café venue | Direct match for "lecture/talk" — better fit than the original booth-conversation substitute. |
 | Формати → Події під запит | Coach/organizer briefing a group in a circle on an outdoor sports court, clipboard in hand | Direct match for "custom event being organized" — better fit than the original two-men-talking substitute, which also carried no visible Sport&Company branding. |
+| Атмосфера gallery small #1 | Close-up of several players' hands stacked together mid-huddle | Direct match for "team hands huddle" — fills the gap the original asset set never had a real photo for (previously a duplicate of the hero/gallery-large photo). |
 
-Both were supplied at 1500×1000 and center-cropped to the required
-666×1000 portrait frame (no upscaling).
+The two Формати photos were supplied at 1500×1000 and cropped to
+666×500 — the frame the site actually displays (`Formats.module.css`
+forces every card photo through `aspect-ratio: 4/3`, which silently
+re-crops a taller source down to its middle band; delivering the file
+already at 4:3 avoids that surprise). The gallery hands photo was
+supplied at 1500×1000 and cropped to a 700×700 square, matching its
+slot's `aspect-ratio: 1/1`.
 
 All mapped photos will be copied into `frontend/src/assets/photos/` and
 served at web-appropriate sizes (resized/compressed on the way in, since the

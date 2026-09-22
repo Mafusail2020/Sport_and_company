@@ -231,7 +231,7 @@ export const gallery = {
     slotKey: "gallery-large",
   },
   small: [
-    { photo: "hero-team-celebration.jpg", alt: "Крупний план — руки гравців разом у колі", slotKey: "gallery-small-1" },
+    { photo: "gallery-hands-huddle.jpg", alt: "Крупний план — руки гравців разом у колі", slotKey: "gallery-small-1" },
     { photo: "format-mafia.jpg", alt: "Руки тримають фірмові карти Sport&Company для гри в мафію", slotKey: "gallery-small-2" },
     { photo: "format-talks.jpg", alt: "Спікер із мікрофоном виступає перед слухачами", slotKey: "gallery-small-3" },
     { photo: "format-team-games.jpg", alt: "Гравці у стрибку за м'ячем на пляжному волейболі", slotKey: "gallery-small-4" },
