@@ -12,8 +12,8 @@ export default function Formats() {
   const reveal = useScrollReveal();
 
   return (
-    <section id="formats" ref={reveal} className={`section ${styles.section} reveal`}>
-      <div className="container">
+    <section id="formats" className={`section ${styles.section}`}>
+      <div ref={reveal} className="container reveal">
         <div className={styles.head}>
           <div>
             <span className="eyebrow">{formats.eyebrow}</span>

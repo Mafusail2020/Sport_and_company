@@ -7,8 +7,8 @@ export default function About() {
   const reveal = useScrollReveal();
 
   return (
-    <section id="about" ref={reveal} className={`section ${styles.section} reveal`}>
-      <div className={`container ${styles.grid}`}>
+    <section id="about" className={`section ${styles.section}`}>
+      <div ref={reveal} className={`container ${styles.grid} reveal`}>
         <div className={styles.photoWrap}>
           <img
             src={aboutPhoto}

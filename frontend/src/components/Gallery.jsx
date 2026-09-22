@@ -12,8 +12,8 @@ export default function Gallery() {
   const reveal = useScrollReveal();
 
   return (
-    <section id="gallery" ref={reveal} className="section reveal">
-      <div className="container">
+    <section id="gallery" className="section">
+      <div ref={reveal} className="container reveal">
         <span className="eyebrow">{gallery.eyebrow}</span>
         <h2 className={styles.heading}>{gallery.heading}</h2>
 

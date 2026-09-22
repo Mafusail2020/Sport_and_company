@@ -16,8 +16,8 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" ref={reveal} className={`section ${styles.section} reveal`}>
-      <div className="container">
+    <section id="pricing" className={`section ${styles.section}`}>
+      <div ref={reveal} className="container reveal">
         <span className="eyebrow">{pricing.eyebrow}</span>
         <h2 className={styles.heading}>{pricing.heading}</h2>
         <p className={styles.intro}>{pricing.intro}</p>

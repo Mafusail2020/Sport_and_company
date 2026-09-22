@@ -7,8 +7,8 @@ export default function Partners() {
   const reveal = useScrollReveal();
 
   return (
-    <section id="partners" ref={reveal} className={`${styles.section} section section--dark reveal`}>
-      <div className={`container ${styles.inner}`}>
+    <section id="partners" className={`${styles.section} section section--dark`}>
+      <div ref={reveal} className={`container ${styles.inner} reveal`}>
         <span className="eyebrow">{partners.eyebrow}</span>
         <h2 className={styles.heading}>
           {partners.heading.map((line) => (

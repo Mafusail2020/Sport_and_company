@@ -36,7 +36,7 @@ body {
    element scrolls into view. */
 .reveal {
   opacity: 0;
-  transform: translateY(28px);
+  transform: translateY(44px);
   transition: opacity 0.7s ease, transform 0.7s ease;
 }
 

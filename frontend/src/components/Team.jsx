@@ -8,8 +8,8 @@ export default function Team() {
   const reveal = useScrollReveal();
 
   return (
-    <section id="team" ref={reveal} className="section reveal">
-      <div className={`container ${styles.grid}`}>
+    <section id="team" className="section">
+      <div ref={reveal} className={`container ${styles.grid} reveal`}>
         <div>
           <span className="eyebrow">{team.eyebrow}</span>
           <h2 className={styles.heading}>

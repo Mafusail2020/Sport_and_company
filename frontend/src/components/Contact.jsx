@@ -59,8 +59,8 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" ref={reveal} className={`${styles.section} section section--mint reveal`}>
-      <div className={`container ${styles.grid}`}>
+    <section id="contact" className={`${styles.section} section section--mint`}>
+      <div ref={reveal} className={`container ${styles.grid} reveal`}>
         <div>
           <span className="eyebrow">{contact.eyebrow}</span>
           <h2 className={styles.heading}>{contact.heading}</h2>
