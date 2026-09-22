@@ -1,4 +1,4 @@
-import iconUrl from "../assets/logo/icon.svg";
+import iconUrl from "../assets/logo/icon-round.svg";
 import styles from "./Logo.module.css";
 
 // Rendered as a live text wordmark (not a flattened logo image) so color can
