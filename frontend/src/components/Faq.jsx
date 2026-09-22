@@ -29,11 +29,19 @@ export default function Faq() {
                   </span>
                 </button>
               </h3>
-              {isOpen && (
-                <div id={panelId} role="region" aria-labelledby={buttonId} className={styles.answer}>
-                  <p>{item.answer}</p>
+              <div
+                id={panelId}
+                role="region"
+                aria-labelledby={buttonId}
+                aria-hidden={!isOpen}
+                className={`${styles.answerWrap} ${isOpen ? styles.answerWrapOpen : ""}`}
+              >
+                <div className={styles.answer}>
+                  <div className={styles.answerInner}>
+                    <p>{item.answer}</p>
+                  </div>
                 </div>
-              )}
+              </div>
             </li>
           );
         })}

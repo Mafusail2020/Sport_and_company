@@ -36,6 +36,11 @@
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--navy-900);
+  transition: color 0.2s ease;
+}
+
+.trigger:hover {
+  color: var(--navy-950);
 }
 
 .icon {
@@ -49,10 +54,29 @@
   color: var(--green-600);
 }
 
+/* Grid-rows trick animates to the answer's natural height without a
+   fixed max-height guess — 0fr collapses the row track to nothing,
+   1fr lets it grow to the content's intrinsic size, and overflow:hidden
+   on both keeps the sliding edge clean. */
+.answerWrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  transition: grid-template-rows 0.3s ease;
+}
+
+.answerWrapOpen {
+  grid-template-rows: 1fr;
+}
+
 .answer {
-  padding: 0 28px 28px;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.answerInner {
+  padding: 20px 28px 28px;
   border-top: 1px solid var(--border-light);
-  padding-top: 20px;
 }
 
 .answer p {
