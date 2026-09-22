@@ -10,9 +10,9 @@ export default function Hero() {
 
   return (
     <section id="hero" className={`${styles.hero} container`}>
-      <div ref={revealCopy} className={`${styles.copy} reveal`}>
-        <span className="eyebrow">{hero.eyebrow}</span>
-        <h1 className={styles.heading}>
+      <div ref={revealCopy} className={styles.copy}>
+        <span className="eyebrow reveal">{hero.eyebrow}</span>
+        <h1 className={`${styles.heading} reveal`}>
           {hero.heading.map((line) => (
             <span key={line} className={styles.headingLine}>
               {line}
@@ -20,15 +20,15 @@ export default function Hero() {
           ))}
           <span className={`accent ${styles.headingLine}`}>{hero.headingAccent}</span>
         </h1>
-        <p className={styles.paragraph}>{hero.paragraph}</p>
+        <p className={`${styles.paragraph} reveal`}>{hero.paragraph}</p>
 
-        <ul className={styles.tags}>
+        <ul className={`${styles.tags} reveal`}>
           {hero.tags.map((tag) => (
             <li key={tag}>{tag}</li>
           ))}
         </ul>
 
-        <div className={styles.ctas}>
+        <div className={`${styles.ctas} reveal`}>
           <Button href="#contact" variant="filled">
             {hero.primaryCta}
           </Button>
