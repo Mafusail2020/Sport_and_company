@@ -1,4 +1,5 @@
 import { PackageProvider } from "./context/PackageContext.jsx";
+import { PhotoOverridesProvider } from "./context/PhotoOverridesContext.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import Stats from "./components/Stats.jsx";
@@ -16,24 +17,26 @@ import ScrollTopButton from "./components/ScrollTopButton.jsx";
 export default function App() {
   return (
     <PackageProvider>
-      <a href="#main" className="skip-link">
-        Перейти до основного вмісту
-      </a>
-      <Header />
-      <main id="main">
-        <Hero />
-        <Stats />
-        <WhyUs />
-        <About />
-        <Formats />
-        <Pricing />
-        <Gallery />
-        <Partners />
-        <Team />
-        <Contact />
-      </main>
-      <Footer />
-      <ScrollTopButton />
+      <PhotoOverridesProvider>
+        <a href="#main" className="skip-link">
+          Перейти до основного вмісту
+        </a>
+        <Header />
+        <main id="main">
+          <Hero />
+          <Stats />
+          <WhyUs />
+          <About />
+          <Formats />
+          <Pricing />
+          <Gallery />
+          <Partners />
+          <Team />
+          <Contact />
+        </main>
+        <Footer />
+        <ScrollTopButton />
+      </PhotoOverridesProvider>
     </PackageProvider>
   );
 }
