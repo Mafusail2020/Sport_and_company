@@ -3,7 +3,7 @@
 }
 
 .list {
-  background: var(--white);
+  background: var(--bg-light);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-card);
   overflow: hidden;

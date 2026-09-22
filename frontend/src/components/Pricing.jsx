@@ -14,7 +14,7 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" className="section">
+    <section id="pricing" className={`section ${styles.section}`}>
       <div className="container">
         <span className="eyebrow">{pricing.eyebrow}</span>
         <h2 className={styles.heading}>{pricing.heading}</h2>
