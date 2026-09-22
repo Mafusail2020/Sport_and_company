@@ -50,10 +50,10 @@ placeholder, per the same approval.
 | `IMG_6557.JPG` | 832×1280 | 4 people at a conference table with SPORT&Company-branded papers/water bottles | Про нас (About) team photo | Best real match for "team around a table in an office/lounge setting." |
 | `IMG_9840.JPG` | 2618×3927 | Runners crossing under a start/finish inflatable arch, outdoor road race | Формати → Спортивні змагання card | Strong match for "marathon finish line" (this is a start-line shot, not finish, but same event type and crowd energy). |
 | `IMG_6818.JPG` | 853×1280 | Two men mid-jump at the net, beach/sand volleyball court | Формати → Командні ігри card | Strong match for "volleyball" — sand court instead of the mockup's indoor gym, otherwise on-theme. |
-| `IMG_8650.JPG` | 3115×4672 | Three people talking at an outdoor branded info booth | Формати → Лекції та розмови card | No literal lecture-with-audience photo exists; this is the closest "people engaged in conversation around Sport&Company content" shot. |
+| ~~`IMG_8650.JPG`~~ | 3115×4672 | Three people talking at an outdoor branded info booth | ~~Формати → Лекції та розмови card~~ superseded | Replaced with a user-supplied photo (not from this `/assets` set — see below); kept here for the record. |
 | `IMG_9691.JPEG` | 1365×2048 | Close-up of hands holding SPORT&Company-branded playing cards | Формати → Мафія та вечори card | Very strong match — literal card game, on-brand card design. |
 | `IMG_1459.JPG` | 2600×1733 | Futsal duel for the ball, competitive 1v1 | Формати → Корпоративні активності card | No tug-of-war equivalent exists; used as the closest "competitive team activity" substitute. |
-| `IMG_7931.JPEG` | 3979×5968 | Two men in conversation, indoor evening setting | Формати → Події під запит card | No outdoor group-talking photo exists; closest "let's discuss your idea" conversational mood. |
+| ~~`IMG_7931.JPEG`~~ | 3979×5968 | Two men in conversation, indoor evening setting | ~~Формати → Події під запит card~~ superseded | Replaced with a user-supplied photo (not from this `/assets` set — see below); kept here for the record. |
 | `IMG_9691.JPEG` (reused) | — | (see above) | Атмосфера gallery small #2 (мафія) | Same card-game photo reused per transcript's own repeated slot (transcript lists "friends playing Mafia" in both Formats and Gallery). |
 | `IMG_6818.JPG` (reused) | — | (see above) | Атмосфера gallery small #4 (volleyball) | Transcript lists "volleyball action" as both a Formats photo and a Gallery photo — reused intentionally, not a mistake. |
 | `IMG_8650.JPG` (reused) | — | (see above) | Атмосфера gallery small #3 ("group talking outdoors") | Closest available "people talking" shot; reused from Формати for the same reason as above. |
@@ -61,6 +61,20 @@ placeholder, per the same approval.
 | `IMG_0195.JPG` | 3936×2624 | Large group photo, SPORT&Company flag, outdoor evening (camping/trip setting) | Команда (Team/Join-us) photo | Best match for "large group of smiling friends, outdoor" — setting is a trip/campsite rather than a court, but it's the strongest real group-photo available. |
 | `IMG_9699.JPEG` | 1365×2048 | SPORT&Company branded flag/banner hanging in front of a bookshelf | Not used | No section calls for a static banner/flag-on-shelf image; doesn't fit hero, formats, gallery, about, or team slots. |
 | `IMG_3496.JPG` | 2156×1502 | Digital illustration/artwork, portrait of a woman — unrelated to sports or youth-community content | Not used | Out of scope for this project; confirmed with user to ignore. Left untouched in `assets/`, not copied to `frontend/src/assets/`. |
+
+## Later photo replacements (not from `/assets`)
+Two slots were later re-mapped to photos the user supplied directly in
+conversation, not sourced from this read-only folder — noted here since
+this doc is meant to track what's actually behind each slot, not just the
+original brief's asset set.
+
+| Slot | New content | Why |
+|---|---|---|
+| Формати → Лекції та розмови | Speaker with a mic addressing a seated audience in a bookshop/café venue | Direct match for "lecture/talk" — better fit than the original booth-conversation substitute. |
+| Формати → Події під запит | Coach/organizer briefing a group in a circle on an outdoor sports court, clipboard in hand | Direct match for "custom event being organized" — better fit than the original two-men-talking substitute, which also carried no visible Sport&Company branding. |
+
+Both were supplied at 1500×1000 and center-cropped to the required
+666×1000 portrait frame (no upscaling).
 
 All mapped photos will be copied into `frontend/src/assets/photos/` and
 served at web-appropriate sizes (resized/compressed on the way in, since the
