@@ -21,10 +21,13 @@
   color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-weight: 600;
+  transition: color 0.2s ease;
 }
 
 .nav a:hover {
-  color: var(--white);
+  /* Brand mint, matching the accent green used on every other dark
+     section (WhyUs/Partners), not a plain white brighten. */
+  color: var(--brand-mint);
 }
 
 .divider {
