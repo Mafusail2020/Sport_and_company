@@ -8,10 +8,16 @@ import { createRoot } from "react-dom/client";
 // (Header's .bar did exactly this — its "taller navbar" padding was being
 // zeroed out).
 import "./styles/global.css";
-import App from "./App.jsx";
+
+// No router: this app has exactly two "routes" (the marketing page and
+// /admin), so a pathname check plus a dynamic import is enough — and keeps
+// the admin bundle (forms, fetch calls) code-split out of the public one
+// entirely rather than pulling in a routing dependency for two pages.
+const isAdmin = window.location.pathname.startsWith("/admin");
+const { default: Root } = isAdmin ? await import("./AdminApp.jsx") : await import("./App.jsx");
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
+    <Root />
   </StrictMode>
 );

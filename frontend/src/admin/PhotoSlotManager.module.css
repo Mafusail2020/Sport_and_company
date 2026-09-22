@@ -1,0 +1,59 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.error {
+  color: #b3261e;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+  background: var(--bg-light);
+}
+
+.thumb {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 12px;
+  background: var(--border-light);
+}
+
+.label {
+  font-weight: 700;
+  color: var(--navy-900);
+}
+
+.status {
+  font-size: 0.85rem;
+  color: var(--slate-700);
+}
+
+.fileInput {
+  font-size: 0.85rem;
+}
+
+.revertButton {
+  align-self: flex-start;
+  border: none;
+  background: transparent;
+  color: var(--navy-900);
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}

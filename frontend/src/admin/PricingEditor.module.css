@@ -1,0 +1,122 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.primaryButton,
+.secondaryButton {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 10px 18px;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+}
+
+.primaryButton {
+  border: none;
+  background: var(--mint-400);
+  color: var(--navy-900);
+}
+
+.primaryButton:hover:not(:disabled) {
+  background: var(--mint-500);
+}
+
+.primaryButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.secondaryButton {
+  border: 1px solid var(--navy-900);
+  background: transparent;
+  color: var(--navy-900);
+}
+
+.success {
+  color: var(--green-600);
+  font-weight: 600;
+}
+
+.error {
+  color: #b3261e;
+  font-weight: 600;
+}
+
+.hint {
+  color: var(--slate-700);
+}
+
+.card {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+  background: var(--bg-light);
+}
+
+.card legend {
+  grid-column: 1 / -1;
+  font-family: var(--font-heading);
+  font-weight: 800;
+  text-transform: uppercase;
+  color: var(--navy-900);
+  padding: 0 4px;
+}
+
+.card label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-weight: 600;
+  color: var(--navy-900);
+  font-size: 0.9rem;
+}
+
+.card input,
+.card select,
+.card textarea {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 500;
+  padding: 10px 12px;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+  color: var(--navy-900);
+  background: var(--white);
+}
+
+.checkboxField {
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.checkboxField input {
+  width: auto;
+}
+
+.fullWidth {
+  grid-column: 1 / -1;
+}
+
+.removeButton {
+  grid-column: 1 / -1;
+  justify-self: start;
+  border: none;
+  background: transparent;
+  color: #b3261e;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 4px 0;
+}
