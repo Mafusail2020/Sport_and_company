@@ -106,8 +106,8 @@ export const formats = {
       photo: "format-talks.jpg",
       slotKey: "formats-talks",
       width: 666,
-      height: 1000,
-      alt: "Троє людей спілкуються біля інформаційного стенду Sport&Company",
+      height: 500,
+      alt: "Спікер із мікрофоном виступає перед слухачами",
     },
     {
       title: "МАФІЯ ТА ВЕЧОРИ",
@@ -133,8 +133,8 @@ export const formats = {
       photo: "format-custom.jpg",
       slotKey: "formats-custom",
       width: 666,
-      height: 1000,
-      alt: "Двоє чоловіків обговорюють ідею у вечірній обстановці",
+      height: 500,
+      alt: "Тренер та організаторка обговорюють план з командою на майданчику",
     },
   ],
 };
@@ -233,7 +233,7 @@ export const gallery = {
   small: [
     { photo: "hero-team-celebration.jpg", alt: "Крупний план — руки гравців разом у колі", slotKey: "gallery-small-1" },
     { photo: "format-mafia.jpg", alt: "Руки тримають фірмові карти Sport&Company для гри в мафію", slotKey: "gallery-small-2" },
-    { photo: "format-talks.jpg", alt: "Люди спілкуються біля інформаційного стенду Sport&Company", slotKey: "gallery-small-3" },
+    { photo: "format-talks.jpg", alt: "Спікер із мікрофоном виступає перед слухачами", slotKey: "gallery-small-3" },
     { photo: "format-team-games.jpg", alt: "Гравці у стрибку за м'ячем на пляжному волейболі", slotKey: "gallery-small-4" },
   ],
 };
