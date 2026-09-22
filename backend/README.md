@@ -95,7 +95,7 @@ Swap the `fs.appendFile` call in `server.js` for a call to your provider's
 SDK (Resend, SendGrid, SMTP, etc.), and add the provider's credentials as
 env vars documented in `.env.example` — never hardcode them in `server.js`
 or commit real values in `.env`. The target inbox would most likely be
-`hello@sportandcompany.ua` (per the contact section), but confirm before
+`krutkev00@gmail.com` (per the contact section), but confirm before
 wiring it up for real.
 
 ## Note on the subject-option whitelist

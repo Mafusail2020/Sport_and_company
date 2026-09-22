@@ -187,7 +187,6 @@ values where the logo mark is reproduced (icon graphic), not tied to the
 
 ## Open questions still logged for the user (from CONTENT_TRANSCRIPT.md §10)
 - Real phone number (currently the dummy `+380 00 000 00 00` from the design)
-- Real Instagram / Telegram URLs (currently label-only links)
 - Full "Тема звернення" dropdown option list (only "Пакет Start" is confirmed
   visible; shipping with an inferred set — see design-spec.md)
 - Full consent fine-print under the contact submit button (truncated in the

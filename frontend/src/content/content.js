@@ -270,13 +270,12 @@ export const contact = {
   heading: "ЗНАЙДИ НАС ПОЗА ЕКРАНОМ",
   paragraph:
     "Напиши нам, якщо хочеш замовити подію, стати партнером або просто дізнатися, де ми граємо цього тижня. Відповідаємо протягом доби.",
-  email: "hello@sportandcompany.ua",
+  email: "krutkev00@gmail.com",
   // [PLACEHOLDER] dummy number from the source design — needs a real number before launch
   phone: "+380 00 000 00 00",
-  // [PLACEHOLDER] label-only in the source design — needs real handles/URLs before launch
   social: [
-    { label: "Instagram", href: "#" },
-    { label: "Telegram", href: "#" },
+    { label: "Instagram", href: "https://www.instagram.com/sportcompany_kyiv" },
+    { label: "Telegram", href: "https://t.me/sportcompany_kyiv" },
   ],
   location: "Київ, Україна",
   form: {
