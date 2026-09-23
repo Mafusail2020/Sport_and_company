@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import { pricing } from "../content/content.js";
 import { usePackageSelection } from "../context/PackageContext.jsx";
+import { usePricingOverride } from "../context/PricingOverrideContext.jsx";
 import useScrollReveal from "../hooks/useScrollReveal.js";
 import Button from "./Button.jsx";
 import Faq from "./Faq.jsx";
@@ -8,34 +8,9 @@ import styles from "./Pricing.module.css";
 
 export default function Pricing() {
   const { setSelectedPackage } = usePackageSelection();
+  const { packages } = usePricingOverride();
   const revealPackages = useScrollReveal();
   const revealFaq = useScrollReveal();
-  const [packagesOverride, setPackagesOverride] = useState(null);
-
-  useEffect(() => {
-    let cancelled = false;
-
-    fetch("/api/pricing")
-      .then((response) => (response.ok ? response.json() : null))
-      .then((data) => {
-        if (!cancelled && data && Array.isArray(data.packages)) setPackagesOverride(data.packages);
-      })
-      .catch(() => {
-        // Fails open: stays null, section stays hidden below — same as
-        // "no packages configured yet."
-      });
-
-    return () => {
-      cancelled = true;
-    };
-  }, []);
-
-  // No real packages are live yet, so there's nothing to show by default —
-  // the section only appears once an admin actually saves one via /admin
-  // (pricing.packages in content.js still holds the real transcript copy,
-  // used as PricingEditor's starting point so "add one" means publishing
-  // real approved copy, not writing new content from scratch).
-  const packages = packagesOverride ?? [];
 
   function handleChoose(event, pkg) {
     event.preventDefault();

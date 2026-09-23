@@ -1,15 +1,29 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import Logo from "./Logo.jsx";
 import Button from "./Button.jsx";
 import useScrollspy from "../hooks/useScrollspy.js";
 import useScrollProgress from "../hooks/useScrollProgress.js";
-import { nav } from "../content/content.js";
+import { usePricingOverride } from "../context/PricingOverrideContext.jsx";
+import { nav as navDefaults } from "../content/content.js";
 import styles from "./Header.module.css";
 
-const sectionIds = nav.map((item) => item.href.slice(1));
+const hasPricingLink = navDefaults.some((item) => item.href === "#pricing");
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const { packages } = usePricingOverride();
+  const hasPackages = packages.length > 0;
+
+  // Mirrors Pricing.jsx: with no packages, that section unmounts entirely
+  // (nothing left to jump to), so its nav link shouldn't be offered either.
+  // Memoized on hasPackages (not recomputed every render) so useScrollspy's
+  // effect below — keyed on this array's identity — doesn't tear down and
+  // rebuild its IntersectionObserver on every scroll-driven re-render.
+  const nav = useMemo(
+    () => (hasPackages || !hasPricingLink ? navDefaults : navDefaults.filter((item) => item.href !== "#pricing")),
+    [hasPackages]
+  );
+  const sectionIds = useMemo(() => nav.map((item) => item.href.slice(1)), [nav]);
   const activeId = useScrollspy(sectionIds);
   const progress = useScrollProgress();
 
