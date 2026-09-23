@@ -1,12 +1,13 @@
 # Sport&Company — backend
 
 Express API backing the site's contact form and its password-gated
-`/admin` area. `POST /api/contact` is a **fully-stubbed local backend** (per
-user decision — see `../CLAUDE.md`): it validates, sanitizes, and
-rate-limits submissions, and logs them (locally in dev, to Vercel Blob in
-production). It does not send real email and needs no provider credentials
-to work. The admin routes are real, though — they persist pricing/photo
-overrides to Blob so admin edits actually show up for every visitor.
+`/admin` area. `POST /api/contact` validates, sanitizes, and rate-limits
+submissions, logs them (locally in dev, to Vercel Blob in production), and
+then sends a notification email via Resend — see "Email notifications"
+below. Logging happens first and always succeeds/fails independently of the
+email step, so a mail-provider hiccup never loses a submission. The admin
+routes persist pricing/photo/contact-info overrides to Blob so admin edits
+actually show up for every visitor.
 
 ## Running
 
@@ -43,13 +44,17 @@ serverless function `../api/server.js` re-exports in production.
    - `details`: optional, ≤2000 chars.
    - Control characters are stripped from every text field.
 3. CORS is restricted to `FRONTEND_ORIGIN` — no wildcard origin.
-4. On success, logs the submission and returns `{ ok: true }`. Locally, that
-   means appending a JSON line to `backend/submissions.log` (gitignored —
-   never committed); in production (`process.env.VERCEL` is set), it means
-   appending to a JSON document in Vercel Blob instead, since Vercel's
-   production filesystem is read-only outside `/tmp` and a local file
-   wouldn't persist there. On validation failure, returns `400` with the
-   specific errors. Nothing is emailed either way.
+4. On success, logs the submission first. Locally, that means appending a
+   JSON line to `backend/submissions.log` (gitignored — never committed); in
+   production (`process.env.VERCEL` is set), it means appending to a JSON
+   document in Vercel Blob instead, since Vercel's production filesystem is
+   read-only outside `/tmp` and a local file wouldn't persist there. On
+   validation failure, returns `400` with the specific errors; on a logging
+   failure, returns `500` before any email is attempted.
+5. Sends a notification email (see below), then returns `{ ok: true }`. The
+   email step is best-effort and never fails the request — the submission
+   is already durably recorded by this point regardless of whether the email
+   goes out.
 
 ## Admin area
 
@@ -89,14 +94,25 @@ but admin saves/uploads will fail with a clean error — connect a Blob store
 to the Vercel project and pull the token down, or copy it from the
 dashboard, to exercise the full admin flow locally.
 
-## If this later needs to send real email
+## Email notifications
 
-Swap the `fs.appendFile` call in `server.js` for a call to your provider's
-SDK (Resend, SendGrid, SMTP, etc.), and add the provider's credentials as
-env vars documented in `.env.example` — never hardcode them in `server.js`
-or commit real values in `.env`. The target inbox would most likely be
-`krutkev00@gmail.com` (per the contact section), but confirm before
-wiring it up for real.
+`lib/mailer.js` sends a notification email for every contact-form submission
+via [Resend](https://resend.com)'s free tier (3,000/month, 100/day, no card
+needed). It sends from the shared `onboarding@resend.dev` test address,
+which requires no domain verification but only delivers to the email that
+owns the Resend account — sign up with the same address submissions should
+land at.
+
+Needs `RESEND_API_KEY` (`.env.example` has the signup link). Without it set,
+the route just logs a warning and skips sending — the submission is still
+recorded either way, so local dev needs no key at all.
+
+The recipient is whatever's saved in `/admin` → Контакти
+(`data/contact-info.json` in Blob), falling back to `krutkev00@gmail.com`
+(`DEFAULT_CONTACT_EMAIL` in `server.js`, mirroring `content.js`'s default)
+if nothing's been saved yet. Changing that address in the admin panel to one
+outside the Resend account will silently stop delivery until a verified
+domain replaces the `resend.dev` sender in `lib/mailer.js`.
 
 ## Note on the subject-option whitelist
 

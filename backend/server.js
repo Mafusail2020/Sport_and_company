@@ -1,4 +1,4 @@
-const fs = require("node:fs");
+const fs = require("node:fs/promises");
 const path = require("node:path");
 const express = require("express");
 const cors = require("cors");
@@ -8,11 +8,16 @@ const contentRoutes = require("./routes/content");
 const adminAuthRoutes = require("./routes/adminAuth");
 const adminContentRoutes = require("./routes/adminContent");
 const blobStore = require("./lib/blobStore");
+const { sendContactNotification } = require("./lib/mailer");
 
 const PORT = process.env.PORT || 3001;
 const FRONTEND_ORIGIN = process.env.FRONTEND_ORIGIN || "http://localhost:5173";
 const LOG_FILE = path.join(__dirname, "submissions.log");
 const IS_PRODUCTION = Boolean(process.env.VERCEL);
+// Mirrors frontend/src/content/content.js's `contact.email` default. Same
+// intentional-duplication pattern as SUBJECT_OPTIONS in validate.js — the
+// backend can't import the frontend's copy, so keep both in sync by hand.
+const DEFAULT_CONTACT_EMAIL = "krutkev00@gmail.com";
 
 const app = express();
 
@@ -41,34 +46,32 @@ app.post("/api/contact", contactLimiter, async (req, res) => {
     return res.status(400).json({ error: "Invalid submission", details: result.errors });
   }
 
-  // Stub backend: no real email is sent (see backend/README.md). Every
-  // submission is logged so it can be reviewed manually — locally to a
-  // gitignored file (easy to tail while developing), in production to Blob
-  // (Vercel's production filesystem is read-only outside /tmp, so the local
-  // file approach can't work there).
+  // Every submission is durably logged first — locally to a gitignored file
+  // (easy to tail while developing), in production to Blob (Vercel's
+  // production filesystem is read-only outside /tmp, so the local file
+  // approach can't work there) — before any email is attempted, so a
+  // mail-provider hiccup can never lose a submission.
   const entry = {
     receivedAt: new Date().toISOString(),
     ...result.data,
   };
 
-  if (IS_PRODUCTION) {
-    try {
+  try {
+    if (IS_PRODUCTION) {
       await blobStore.appendJsonLine(blobStore.CONTACT_LOG_PATH, entry);
-      return res.status(200).json({ ok: true });
-    } catch (err) {
-      console.error("Failed to record submission to Blob:", err);
-      return res.status(500).json({ error: "Could not record submission" });
+    } else {
+      await fs.appendFile(LOG_FILE, `${JSON.stringify(entry)}\n`);
+      console.log("New contact submission:", entry);
     }
+  } catch (err) {
+    console.error("Failed to record submission:", err);
+    return res.status(500).json({ error: "Could not record submission" });
   }
 
-  fs.appendFile(LOG_FILE, `${JSON.stringify(entry)}\n`, (err) => {
-    if (err) {
-      console.error("Failed to write submission log:", err);
-      return res.status(500).json({ error: "Could not record submission" });
-    }
-    console.log("New contact submission:", entry);
-    return res.status(200).json({ ok: true });
-  });
+  const contactInfo = await blobStore.readJson(blobStore.CONTACT_INFO_PATH).catch(() => null);
+  await sendContactNotification(entry, contactInfo?.email || DEFAULT_CONTACT_EMAIL);
+
+  return res.status(200).json({ ok: true });
 });
 
 app.use("/api", contentRoutes);

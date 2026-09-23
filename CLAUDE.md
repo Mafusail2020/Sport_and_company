@@ -14,11 +14,13 @@ submits through the contact form.
   password-gated `/admin` area (see below) is the one exception: it's a
   second, code-split entry point rendered by a plain pathname check in
   `main.jsx`, not a router.
-- `backend/`: Express API. `POST /api/contact` is still fully stubbed —
-  validates, sanitizes and rate-limits submissions, sends no real email (see
-  "Resolved decisions" below) — plus an admin API (`/api/admin/*`) backing
-  the `/admin` area, and two public read routes (`GET /api/pricing`,
-  `GET /api/photos`) the marketing page fetches at runtime.
+- `backend/`: Express API. `POST /api/contact` validates, sanitizes and
+  rate-limits submissions, logs them, then sends a notification email via
+  Resend's free tier (see "Resolved decisions" below and
+  `backend/README.md` → "Email notifications") — plus an admin API
+  (`/api/admin/*`) backing the `/admin` area, and public read routes
+  (`GET /api/pricing`, `GET /api/photos`, `GET /api/contact-info`) the
+  marketing page fetches at runtime.
 - Persistence: Vercel Blob only, no separate database (see "Resolved
   decisions" below). Two small JSON documents hold admin *overrides* for
   pricing and photo slots — the public site always falls back to its
@@ -148,8 +150,10 @@ values where the logo mark is reproduced (icon graphic), not tied to the
 ## Resolved decisions / assumptions log
 
 1. **Backend scope (§9)** — user chose the fully-stubbed local backend:
-   `POST /api/contact` validates + sanitizes + rate-limits + logs locally,
-   sends no real email. No provider credentials needed for this to work.
+   `POST /api/contact` validates + sanitizes + rate-limits + logs locally.
+   Originally shipped sending no real email; later extended (see decision
+   #7) to send a real notification email via Resend once `RESEND_API_KEY`
+   is set, with no change to the logging behavior either way.
 2. **Photo assets** — none of the 12 real photos in `assets/` are exact
    scene matches for the stock-style photos shown in the reference
    screenshots (no basketball photo exists at all; formats/gallery scenes
@@ -184,6 +188,17 @@ values where the logo mark is reproduced (icon graphic), not tied to the
    dev proxy — so setting up `vercel.json` (see "Deploying" above) was
    folded into the same effort, since the admin API needs to run somewhere
    in production regardless.
+7. **Real email delivery** — user asked to turn on actual email notifications
+   for contact-form submissions, free only. Chose Resend (free tier: 3,000
+   emails/month, 100/day, no card) over Gmail SMTP for reliable serverless
+   delivery without enabling app passwords on a personal account. Sends from
+   the shared `onboarding@resend.dev` test address (no domain verification
+   needed) to whatever's saved in `/admin` → Контакти, falling back to
+   `krutkev00@gmail.com`. Caveat: `resend.dev` only delivers to the email
+   that owns the Resend account — see `backend/README.md` → "Email
+   notifications" for what happens if that admin-set address is changed to
+   one outside the Resend account (delivery silently stops until a verified
+   domain replaces the sender).
 
 ## Open questions still logged for the user (from CONTENT_TRANSCRIPT.md §10)
 - Real phone number (currently the dummy `+380 00 000 00 00` from the design)
