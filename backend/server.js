@@ -21,6 +21,15 @@ const DEFAULT_CONTACT_EMAIL = "krutkev00@gmail.com";
 
 const app = express();
 
+// Vercel's edge network sits exactly one hop in front of this function, and
+// sets X-Forwarded-For to the real client IP. Without this, req.ip (what
+// every rate limiter below keys on) resolves to Vercel's internal proxy
+// address for every request in production — collapsing all visitors into
+// one bucket, so the limiters below either block everyone together or don't
+// limit anyone meaningfully. `1` = trust exactly one proxy hop, not the
+// whole chain (untrusted, further-forwarded IPs are ignored).
+app.set("trust proxy", 1);
+
 app.use(
   cors({
     origin: FRONTEND_ORIGIN,
@@ -31,15 +40,28 @@ app.use(
 // 10kb was enough for contact-only; a pricing-array PUT body can approach it.
 app.use(express.json({ limit: "50kb" }));
 
-const contactLimiter = rateLimit({
+// Two stacked windows, same idea as a bank fraud check: a short one catches
+// a script firing requests back-to-back (no human re-fills and resubmits a
+// form in 20 seconds), a longer one caps how many even-spaced-out attempts
+// one IP gets. Both key on req.ip and share nothing — an IP has to clear
+// *both* to get through, but clearing one doesn't use up the other's quota.
+const contactBurstLimiter = rateLimit({
+  windowMs: 20 * 1000,
+  limit: 1,
+  standardHeaders: true,
+  legacyHeaders: false,
+  message: { error: "Зачекайте трохи перед повторною відправкою." },
+});
+
+const contactSustainedLimiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  limit: 10,
+  limit: 5,
   standardHeaders: true,
   legacyHeaders: false,
   message: { error: "Забагато запитів. Спробуйте пізніше." },
 });
 
-app.post("/api/contact", contactLimiter, async (req, res) => {
+app.post("/api/contact", contactBurstLimiter, contactSustainedLimiter, async (req, res) => {
   const result = validateContactPayload(req.body);
 
   if (!result.ok) {
