@@ -58,8 +58,12 @@ once the user pushes to their own GitHub remote and imports it on Vercel:
    configures the install/build commands, output directory, and the
    frontend+backend routing, so no dashboard build-settings overrides should
    be needed.
-2. In the Vercel dashboard's Storage tab, connect a Blob store to the
-   project. This auto-injects `BLOB_READ_WRITE_TOKEN` — nothing to type in
+2. In the Vercel dashboard's Storage tab, create a Blob store with
+   **Public** access (not Private — the two can't be converted after
+   creation, and this project's code always calls the SDK with
+   `access: "public"`, since uploaded photos load directly via `<img src>`
+   in the browser, not proxied through a function). Connect it to the
+   project. This auto-injects the store's credentials — nothing to type in
    manually.
 3. In Project Settings → Environment Variables, set for Production (and
    Preview, if `/admin` should also work on preview deploys):
