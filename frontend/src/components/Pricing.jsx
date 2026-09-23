@@ -44,7 +44,17 @@ export default function Pricing() {
   }
 
   return (
-    <section id="pricing" className={`section ${styles.section}`}>
+    <section
+      id="pricing"
+      className={`section ${styles.section}`}
+      // The section's own top padding exists to separate the eyebrow/
+      // heading/grid from whatever's above — with no packages, there's
+      // nothing there to separate, so it renders as a blank white block
+      // above FAQ instead. Zeroing it collapses that gap to nothing while
+      // keeping the bottom padding (still needed after FAQ) and the
+      // #pricing anchor id intact.
+      style={packages.length === 0 ? { paddingTop: 0 } : undefined}
+    >
       {packages.length > 0 && (
         <div ref={revealPackages} className="container reveal">
           <span className="eyebrow">{pricing.eyebrow}</span>
