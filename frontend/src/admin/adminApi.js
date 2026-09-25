@@ -47,4 +47,12 @@ export const adminApi = {
   saveContactInfo: (contactInfo) =>
     request("/api/admin/contact-info", { method: "PUT", body: JSON.stringify(contactInfo) }),
   resetContactInfo: () => request("/api/admin/contact-info", { method: "DELETE" }),
+
+  getPartnerLogos: () => request("/api/partners"),
+  addPartnerLogo: (file) => {
+    const formData = new FormData();
+    formData.append("logo", file);
+    return request("/api/admin/partners", { method: "POST", body: formData });
+  },
+  removePartnerLogo: (logoId) => request(`/api/admin/partners/${logoId}`, { method: "DELETE" }),
 };

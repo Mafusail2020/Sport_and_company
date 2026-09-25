@@ -51,12 +51,23 @@
      radius used everywhere else. */
   border-radius: 12px;
   padding: 32px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
   font-family: var(--font-heading);
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: rgba(255, 255, 255, 0.35);
+}
+
+.logo {
+  max-width: 100%;
+  /* Logos vary wildly in aspect ratio — contain keeps the whole mark
+     visible instead of the photo-slot convention of cropping to fill. */
+  max-height: 48px;
+  object-fit: contain;
 }
 
 @media (min-width: 640px) {

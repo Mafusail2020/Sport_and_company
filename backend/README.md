@@ -62,10 +62,10 @@ Backs the frontend's `/admin` editor. Three route files, plus the shared
 pieces they depend on:
 
 - `routes/content.js` — public, unauthenticated: `GET /api/pricing`,
-  `GET /api/photos`. Both fail open (return `null`/`{}`) on any read error,
-  since the public page always falls back to its shipped static content in
-  that case — these routes existing at all should never be able to break
-  the marketing page.
+  `GET /api/photos`, `GET /api/contact-info`, `GET /api/partners`. All fail
+  open (return `null`/`{}`/`[]`) on any read error, since the public page
+  always falls back to its shipped static content in that case — these
+  routes existing at all should never be able to break the marketing page.
 - `routes/adminAuth.js` — `POST /api/admin/login` (rate-limited, ~5/15min;
   compares against `ADMIN_PASSWORD` with a timing-safe check; issues the
   signed session cookie), `POST /api/admin/logout`, `GET /api/admin/session`.
@@ -74,7 +74,10 @@ pieces they depend on:
   the pricing section from the public page; `DELETE` reverts to the shipped
   defaults), `POST`/`DELETE /api/admin/photos/:slotKey` (multipart upload,
   JPEG/PNG/WebP only, ~4MB cap — Vercel Node functions hard-cap request
-  bodies at 4.5MB).
+  bodies at 4.5MB), `PUT`/`DELETE /api/admin/contact-info`, and
+  `POST /api/admin/partners` / `DELETE /api/admin/partners/:logoId` — an
+  add/remove list (each upload gets a random id, not a fixed slot key like
+  photos), capped at 20 logos, same file-type/size rules as photo uploads.
 - `lib/session.js` / `middleware/requireAdmin.js` — the HMAC session cookie
   (signed with Node's built-in `crypto`, no JWT dependency) and the
   middleware that verifies it on every admin route.

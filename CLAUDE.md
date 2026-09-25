@@ -37,10 +37,15 @@ submits through the contact form.
   workspaces for two small, loosely-coupled apps.
 
 ## Admin area (`/admin`)
-Lets an admin edit two things without touching code: the pricing packages
-(add/remove/edit, or empty the list to remove the whole pricing section from
-the public page) and any of the 14 photo slots (swap the file, or revert to
-the shipped default). Single shared password (`ADMIN_PASSWORD`, backend env
+Lets an admin edit several things without touching code: the pricing
+packages (add/remove/edit, or empty the list to remove the whole pricing
+section from the public page), any of the 14 photo slots (swap the file, or
+revert to the shipped default), contact info (email/phone/social links),
+and partner logos (add/remove — real uploaded images, not just placeholder
+count; the public Партнери section always shows a minimum of 5 boxes,
+filling real logos in left to right and padding the rest with the shipped
+"лого" placeholder, growing past 5 once there are more real logos than
+that). Single shared password (`ADMIN_PASSWORD`, backend env
 var, never sent to the client), verified server-side with a timing-safe
 comparison; on success the backend issues a short-lived HMAC-signed
 `httpOnly`/`Secure`/`SameSite=Strict` session cookie (signed with Node's
@@ -147,7 +152,8 @@ values where the logo mark is reproduced (icon graphic), not tied to the
   `[PLACEHOLDER]` / `[ASSUMPTION]` there need a decision (see log below).
 - `assets/` is read-only. Copy what's needed into `frontend/src/assets/`.
 - Do not fabricate partner logos. The 5 "лого" placeholder slots in Партнери
-  are the real design, not a gap to fill.
+  are the real design, not a gap to fill — an admin can now upload real
+  logos via `/admin` (see decision #8 below), but never invent one.
 - If something is genuinely ambiguous beyond what's already resolved below —
   stop and ask, don't guess.
 
@@ -203,6 +209,18 @@ values where the logo mark is reproduced (icon graphic), not tied to the
    notifications" for what happens if that admin-set address is changed to
    one outside the Resend account (delivery silently stops until a verified
    domain replaces the sender).
+8. **Partner logos (`/admin` → Партнери)** — user asked for the ability to
+   add/remove logos on the Партнери slide, confirmed as real image uploads
+   (not just changing the placeholder count) with no extra metadata (just
+   the image, no name/link field). Stored as an ordered array in Blob
+   (`data/partner-logos.json`), each entry `{id, url}` — an add/remove list,
+   not fixed slots like the 14 photo slots. Public rendering always shows a
+   minimum of `partners.slotCount` (5) boxes: real logos fill left to
+   right, remaining boxes keep the shipped "лого" placeholder; once there
+   are more real logos than 5, the grid just grows past that minimum. This
+   doesn't conflict with the "never fabricate partner logos" constraint —
+   nothing is invented, this only builds the tool for the user to upload
+   real ones later.
 
 ## Open questions still logged for the user (from CONTENT_TRANSCRIPT.md §10)
 - Real phone number (currently the dummy `+380 00 000 00 00` from the design)

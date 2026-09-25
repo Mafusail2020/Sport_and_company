@@ -11,6 +11,7 @@ const PRICING_PATH = "data/pricing.json";
 const PHOTO_OVERRIDES_PATH = "data/photo-overrides.json";
 const CONTACT_LOG_PATH = "data/contact-submissions.json";
 const CONTACT_INFO_PATH = "data/contact-info.json";
+const PARTNER_LOGOS_PATH = "data/partner-logos.json";
 
 const READ_CACHE_TTL_MS = 60 * 1000;
 const readCache = new Map(); // pathname -> { data, expiresAt }
@@ -63,6 +64,17 @@ async function putPhoto(slotKey, buffer, contentType) {
   return result.url;
 }
 
+/** Uploads a partner logo with a random-suffixed pathname (never overwritten in place, unlike photo slots — each upload is a new list entry, not a replacement). Returns its public URL. */
+async function putPartnerLogo(buffer, contentType) {
+  const extension = EXTENSION_BY_CONTENT_TYPE[contentType] || "jpg";
+  const result = await put(`partners/logo.${extension}`, buffer, {
+    access: "public",
+    addRandomSuffix: true,
+    contentType,
+  });
+  return result.url;
+}
+
 /** Best-effort delete by URL or pathname — never throws (e.g. the blob may already be gone). */
 async function deleteBlob(urlOrPathname) {
   if (!urlOrPathname) return;
@@ -78,9 +90,11 @@ module.exports = {
   PHOTO_OVERRIDES_PATH,
   CONTACT_LOG_PATH,
   CONTACT_INFO_PATH,
+  PARTNER_LOGOS_PATH,
   readJson,
   writeJson,
   appendJsonLine,
   putPhoto,
+  putPartnerLogo,
   deleteBlob,
 };

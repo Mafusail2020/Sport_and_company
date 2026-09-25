@@ -1,6 +1,7 @@
 import { PackageProvider } from "./context/PackageContext.jsx";
 import { PhotoOverridesProvider } from "./context/PhotoOverridesContext.jsx";
 import { PricingOverrideProvider } from "./context/PricingOverrideContext.jsx";
+import { PartnerLogosProvider } from "./context/PartnerLogosContext.jsx";
 import Header from "./components/Header.jsx";
 import Hero from "./components/Hero.jsx";
 import Stats from "./components/Stats.jsx";
@@ -20,24 +21,26 @@ export default function App() {
     <PackageProvider>
       <PhotoOverridesProvider>
         <PricingOverrideProvider>
-          <a href="#main" className="skip-link">
-            Перейти до основного вмісту
-          </a>
-          <Header />
-          <main id="main">
-            <Hero />
-            <Stats />
-            <WhyUs />
-            <About />
-            <Formats />
-            <Pricing />
-            <Gallery />
-            <Partners />
-            <Team />
-            <Contact />
-          </main>
-          <Footer />
-          <ScrollTopButton />
+          <PartnerLogosProvider>
+            <a href="#main" className="skip-link">
+              Перейти до основного вмісту
+            </a>
+            <Header />
+            <main id="main">
+              <Hero />
+              <Stats />
+              <WhyUs />
+              <About />
+              <Formats />
+              <Pricing />
+              <Gallery />
+              <Partners />
+              <Team />
+              <Contact />
+            </main>
+            <Footer />
+            <ScrollTopButton />
+          </PartnerLogosProvider>
         </PricingOverrideProvider>
       </PhotoOverridesProvider>
     </PackageProvider>

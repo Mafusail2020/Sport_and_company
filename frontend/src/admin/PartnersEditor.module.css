@@ -1,0 +1,73 @@
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hint {
+  color: var(--slate-700);
+  max-width: 60ch;
+}
+
+.error {
+  color: #b3261e;
+  font-weight: 600;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 16px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-card);
+  background: var(--bg-light);
+}
+
+.thumb {
+  width: 100%;
+  height: 80px;
+  object-fit: contain;
+}
+
+.removeButton {
+  border: none;
+  background: transparent;
+  color: #b3261e;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+}
+
+.addCard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  border: 1px dashed var(--border-light);
+  border-radius: var(--radius-card);
+  min-height: 112px;
+}
+
+.addLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  color: var(--navy-900);
+  cursor: pointer;
+  text-align: center;
+}
+
+.fileInput {
+  font-size: 0.8rem;
+  max-width: 140px;
+}
